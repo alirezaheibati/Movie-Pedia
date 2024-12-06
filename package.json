@@ -1,0 +1,19 @@
+{
+  "name": "21-movie",
+  "version": "1.0.0",
+  "description": "search for movies and save favorites",
+  "default": "index.html",
+  "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build index.html --public-url /projects/movie2/"
+  },
+  "keywords": [],
+  "author": "Alireza heibati",
+  "license": "ISC",
+  "dependencies": {
+    "autoprefixer": "^10.4.20",
+    "parcel": "^2.13.2",
+    "postcss-cli": "^11.0.0",
+    "tailwindcss": "^3.4.16"
+  }
+}
