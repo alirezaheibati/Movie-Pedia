@@ -14,7 +14,7 @@
     <script type="module" src="src/js/app.js"></script>
     <title>Movie Pedia</title>
   </head>
-  <body class="bg-slate-900 overflow-x-hidden">
+  <body class="bg-[#1C1C22] overflow-x-hidden">
     <header
       class="h-screen flex justify-center items-center bg-[url('/src/assets/header-bg.jpg')] bg-cover bg-no-repeat bg-right-bottom  relative"
     >
@@ -141,6 +141,39 @@
 
        </ul>
     </section>
-
+<!-- fetch movies section -->
+ <section class="py-8 text-slate-50">
+  <!-- tabs -->
+  <div class="px-4">
+    <ul class="flex gap-4 text-xl font-lobster  border-b-2 border-b-[#ea2a49]">
+      <li class="active py-2 text-[#ea2a49]"><button>Search Results</button></li>
+      <li class="py-2"><button class="">Favorites</button></li>
+    </ul>
+    <!-- search results -->
+    <div class="py-4">
+      <!-- search item -->
+       <div class="bg-[#23252B] p-4 rounded-lg">
+        <div class="img-container w-full h-[300px]">
+          <img src="src/assets/poster.jpg" alt="film poster" class="rounded-lg h-[300px] w-full object-cover object-top">
+        </div>
+        <div class="movie title flex justify-between items-center pt-3">
+          <h3 class="text-2xl whitespace-nowrap overflow-hidden text-ellipsis">Kill Bill: Vol. 1</h3>
+          <button class="text-2xl"><i class="fa-regular fa-heart text-[#ea2a49]"></i></button>
+        </div>
+        <ul class="flex justify-start items-center p-1 mt-3 rounded-l-lg gap-2 text-[#AFAFAF] bg-gradient-to-r from-[#1C1C22] to-transparent ">
+          <li title="Runtime"><i class="fa-solid fa-clock-rotate-left text-sm"></i> 111</li>
+          <li title="Released"><i class="fa-regular fa-calendar-check "></i> 2003</li>
+          <li title="imdbVotes"><i class="fa-solid fa-star-half-stroke "></i> 8.2 (1,223,388)</li>
+        </ul>
+        <p class="text-[#AFAFAF] mt-2 text-justify">After waking from a four-year coma, a former assa ssin wreaks veng eance on the team of assassins who betrayed her.</p>
+        <hr class="border-slate-500 my-2">
+        <ul class="text-[#AFAFAF] ">
+          <li title="Director"><i class="fa-solid fa-user-tie"></i><span class="font-bold"> Director: </span> Quentin Tarantino</li>
+          <li title="run time" class="mt-1 whitespace-nowrap overflow-hidden text-ellipsis"><i class="fa-solid fa-user-group "></i><span class="font-bold"> Actors: </span> Uma Thurman, David Carradine, Daryl Hannah</li>
+        </ul>
+       </div>
+    </div>
+  </div>
+ </section>
   </body>
 </html>
