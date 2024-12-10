@@ -14,9 +14,9 @@
     <script type="module" src="src/js/app.js"></script>
     <title>Movie Pedia</title>
   </head>
-  <body>
+  <body class="bg-slate-900 overflow-x-hidden">
     <header
-      class="h-screen w-screen flex justify-center items-center bg-[url('/src/assets/header-bg.jpg')] bg-cover bg-no-repeat bg-right-bottom  relative"
+      class="h-screen flex justify-center items-center bg-[url('/src/assets/header-bg.jpg')] bg-cover bg-no-repeat bg-right-bottom  relative"
     >
       <!-- header menu -->
       <div
@@ -64,6 +64,83 @@
         </div>
       </form>
     </header>
-    <!-- <img src="src/assets/header-bg.jpg" alt="hei" /> -->
+    <!-- content section -->
+    <section class="py-8">
+      <div class="px-4">
+
+        <h2 class="font-lobster text-3xl text-slate-50">Top <span class="text-[#ea2a49]">10</span> </h2>
+        <hr class="h-1 bg-[#ea2a49] border-[#ea2a49] mt-4 mb-8">
+      </div>
+      <!-- movie slide container -->
+      <div class="w-[300%] h-[400px] flex justify-around translate-x-0 transition-[transform] duration-200 ease-linear"
+      id="slider-container">
+        <!-- single movie box -->
+         <div class="w-[30%] h-full flex justify-start items-end text-slate-50 relative rounded-xl bg-[url('/src/assets/poster.jpg')] bg-cover bg-no-repeat after:content-[''] after:absolute after:left-0 after:top-0 after:w-full after:h-full after:rounded-xl  after:bg-gradient-to-t after:from-[#041023] after:to-transparent">
+          <div class="z-10 w-full p-4">
+            <button class="absolute right-4 top-4 text-3xl"><i class="fa-regular fa-heart text-[#ea2a49]"></i></button>
+            <h3 class="text-2xl whitespace-nowrap overflow-hidden text-ellipsis">From Bedrooms to Billions: The Amiga Years!</h3>
+            <p class="mb-1 text-slate-300">Action, Crime, Thriller</p>
+            <div class="flex justify-start items-start gap-3">
+              <p class="text-amber-500">
+                <i class="fa-solid fa-star-half-stroke "></i> 8.2
+              </p>
+              <p class="text-amber-500">
+                <i class="fa-solid fa-clock-rotate-left text-sm"></i> 111 min
+              </p>
+            </div>
+          </div>
+         </div>
+         <!-- 2 -->
+         <div class="w-[30%] h-[400px] flex justify-start items-end text-slate-50 relative rounded-xl bg-[url('/src/assets/poster.jpg')] bg-cover bg-no-repeat after:content-[''] after:absolute after:left-0 after:top-0 after:w-full after:h-full after:rounded-xl  after:bg-gradient-to-t after:from-[#041023] after:to-transparent">
+          <div class="z-10 w-full p-4">
+           <button class="absolute right-4 top-4 text-3xl"><i class="fa-regular fa-heart text-[#ea2a49]"></i></button>
+           <h3 class="text-2xl whitespace-nowrap overflow-hidden text-ellipsis">From Bedrooms to Billions: The Amiga Years!</h3>
+           <p class="mb-1 text-slate-300">Action2, Crime2, Thriller</p>
+           <div class="flex justify-start items-start gap-3">
+             <p class="text-amber-500">
+               <i class="fa-solid fa-star-half-stroke "></i> 8.2
+             </p>
+             <p class="text-amber-500">
+               <i class="fa-solid fa-clock-rotate-left text-sm"></i> 111 min
+             </p>
+           </div>
+         </div>
+        </div>
+        <!-- 3 -->
+        <div class="w-[30%] h-[400px] flex justify-start items-end text-slate-50 relative rounded-xl bg-[url('/src/assets/poster.jpg')] bg-cover bg-no-repeat after:content-[''] after:absolute after:left-0 after:top-0 after:w-full after:h-full after:rounded-xl  after:bg-gradient-to-t after:from-[#041023] after:to-transparent">
+          <div class="z-10 w-full p-4">
+           <button class="absolute right-4 top-4 text-3xl"><i class="fa-regular fa-heart text-[#ea2a49]"></i></button>
+           <h3 class="text-2xl whitespace-nowrap overflow-hidden text-ellipsis">From Bedrooms to Billions: The Amiga Years!</h3>
+           <p class="mb-1 text-slate-300">Action3, Crime, Thriller</p>
+           <div class="flex justify-start items-start gap-3">
+             <p class="text-amber-500">
+               <i class="fa-solid fa-star-half-stroke "></i> 8.2
+             </p>
+             <p class="text-amber-500">
+               <i class="fa-solid fa-clock-rotate-left text-sm"></i> 111 min
+             </p>
+           </div>
+         </div>
+        </div>
+      </div>
+      <script>
+        function fn(){
+          console.log('1');
+          document.getElementById('slider-container').classList.remove('translate-x-0')
+          document.getElementById('slider-container').classList.add('-translate-x-1/3')
+
+        }
+      </script>
+      <!-- circles -->
+       <ul class=" flex justify-center items-center py-5 gap-2">
+        <li class="bg-slate-300 w-3 h-3 rounded-full"></li>
+        <li class="bg-slate-300 w-3 h-3 rounded-full"></li>
+        <li class="bg-[#ea2a49] w-6 h-3 rounded-full" onclick="fn()"></li>
+        <li class="bg-slate-300 w-3 h-3 rounded-full"></li>
+        <li class="bg-slate-300 w-3 h-3 rounded-full"></li>
+
+       </ul>
+    </section>
+
   </body>
 </html>
