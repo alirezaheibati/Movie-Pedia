@@ -9,4 +9,17 @@ export default class View {
    * @protected
    */
   _data;
+  /**
+   * Renders the view with the provided data.
+   * Updates the inner HTML of the parent element with the generated markup.
+   *
+   * @param {*} data - The data to be rendered in the view.
+   */
+  render(data) {
+    this._data = data;
+
+    const markup = this._generateMarkup();
+    this._parentElement.innerHTML = "";
+    this._parentElement.insertAdjacentHTML("afterbegin", markup);
+  }
 }
