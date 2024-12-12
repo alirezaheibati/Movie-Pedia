@@ -1,6 +1,18 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ["./index.html", "./src/js/**/*.{html,js}"],
+  safelist: [
+    "-translate-x-[10%]",
+    "-translate-x-[20%]",
+    "-translate-x-[30%]",
+    "-translate-x-[40%]",
+    "-translate-x-[50%]",
+    "-translate-x-[60%]",
+    "-translate-x-[70%]",
+    "-translate-x-[80%]",
+    "-translate-x-[90%]",
+    "-translate-x-[0%]",
+  ],
   theme: {
     extend: {
       fontFamily: {
