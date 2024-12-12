@@ -4,6 +4,7 @@ import View from "./View";
  * Extends the base View class to inherit common view properties and methods.
  */
 class TopTenView extends View {
+  slideNum = 0;
   /**
    * The parent element in the DOM where the top ten movies will be rendered.
    * @type {HTMLElement}
@@ -39,6 +40,18 @@ class TopTenView extends View {
         `;
       })
       .join();
+  }
+  /**
+   * Slides to the specified portion of top ten movie container according to slide number.
+   * @param {number} slideNum - The slide number to slide to.
+   */
+  slide(slideNum) {
+    this._parentElement.classList.remove(
+      `-translate-x-[${this.slideNum * 10}%]`
+    );
+
+    this.slideNum = slideNum;
+    this._parentElement.classList.add(`-translate-x-[${10 * slideNum}%]`);
   }
 }
 const topTenView = new TopTenView();
