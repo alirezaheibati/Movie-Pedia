@@ -31,6 +31,20 @@ class TopTenSliderView {
     btn.classList.add("w-6");
     btn.classList.add("bg-[#ea2a49]");
   }
+  /**
+   * Adds event handler to slider buttons for user interactions.
+   * @param {Function} handler - The function to handle the slider button click event.
+   */
+  addHandlerToSlideButtons(handler) {
+    this._parentElement.addEventListener("click", (e) => {
+      const sliderBtn = e.target.closest(".slider-btn");
+      if (!sliderBtn) return;
+      this._removeActiveClass();
+      this._addActiveClass(sliderBtn);
+      const sliderNum = sliderBtn.dataset.slideTo;
+      handler(sliderNum);
+    });
+  }
 }
 const topTenSliderView = new TopTenSliderView();
 export default topTenSliderView;
