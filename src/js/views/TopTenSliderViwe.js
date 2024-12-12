@@ -21,6 +21,16 @@ class TopTenSliderView {
       }
     });
   }
+  /**
+   * Adjust active slider button width and background color spatial values.
+   */
+  _addActiveClass(btn) {
+    btn.classList.remove("w-3");
+    btn.classList.remove("bg-slate-300");
+
+    btn.classList.add("w-6");
+    btn.classList.add("bg-[#ea2a49]");
+  }
 }
 const topTenSliderView = new TopTenSliderView();
 export default topTenSliderView;
