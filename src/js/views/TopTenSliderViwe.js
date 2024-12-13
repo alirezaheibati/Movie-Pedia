@@ -45,6 +45,14 @@ class TopTenSliderView {
       handler(sliderNum);
     });
   }
+  /**
+   * Resets the active slider button to first slider button on screen resize.
+   */
+  resetActiveSliderOnScreenResize() {
+    const firstBtn = this._parentElement.querySelector(".slider-btn");
+    this._removeActiveClass();
+    this._addActiveClass(firstBtn);
+  }
 }
 const topTenSliderView = new TopTenSliderView();
 export default topTenSliderView;
