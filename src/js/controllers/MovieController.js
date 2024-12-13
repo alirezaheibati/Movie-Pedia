@@ -1,6 +1,9 @@
 import MovieModel from "../models/MovieModel";
 import topTenView from "../views/TopTenView";
+import searchBoxView from "../views/SearchBoxView";
+import searchTypeView from "../views/SearchTypeView";
 import topTenSliderView from "../views/TopTenSliderViwe";
+import searchTypeView from "../views/SearchTypeView";
 /**
  * MovieController class that manages the interaction between the model and views.
  * It handles user interactions, fetches movie data, and updates the views accordingly.
@@ -21,6 +24,13 @@ export class MovieController {
   setupEventHandlers() {
     topTenSliderView.addHandlerToSlideButtons(this.handleSlideTopTen);
     topTenView.addHandlerToSliderResize(this.handleTopTenSlideReset);
+    searchBoxView.addHandlerToSearchFormBtn();
+    searchBoxView.addHandlerToSearchFormSubmit(
+      this.handleSearchFormSubmit.bind(this)
+    );
+    searchTypeView.addHandlerSearchTypeSelector(
+      this.handleMovieSearchType.bind(this)
+    );
   }
   /**
    * Renders the top ten movies using the model.
@@ -41,5 +51,12 @@ export class MovieController {
   handleTopTenSlideReset() {
     topTenSliderView.resetActiveSliderOnScreenResize();
     topTenView.slide(0);
+  }
+  /**
+   * Handles the search form submission by loading movie information.
+   * @param {string} searchTerm - The search term entered by the user.
+   */
+  handleSearchFormSubmit(searchTerm) {
+    this.movieModel.loadMoviInformation(searchTerm);
   }
 }
