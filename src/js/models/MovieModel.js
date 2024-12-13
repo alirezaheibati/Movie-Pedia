@@ -8,5 +8,11 @@ export default class MovieModel {
      * Stores top ten Movies of all time information.
      */
     this.topTen = topTenMovies;
+    /**
+     * defines the type of search.
+     * 't' represents movie title search.
+     * 's' represents serial titile search
+     */
+    this.searchType = "t";
   }
 }
