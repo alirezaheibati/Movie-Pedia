@@ -53,6 +53,13 @@ class TopTenView extends View {
     this.slideNum = slideNum;
     this._parentElement.classList.add(`-translate-x-[${10 * slideNum}%]`);
   }
+  /**
+   * Adds an event handler to the window resize event.
+   * @param {Function} handle - The function to handle the window resize event.
+   */
+  addHandlerToSliderResize(handle) {
+    window.addEventListener("resize", handle);
+  }
 }
 const topTenView = new TopTenView();
 export default topTenView;
