@@ -20,6 +20,7 @@ export class MovieController {
    */
   setupEventHandlers() {
     topTenSliderView.addHandlerToSlideButtons(this.handleSlideTopTen);
+    topTenView.addHandlerToSliderResize(this.handleTopTenSlideReset);
   }
   /**
    * Renders the top ten movies using the model.
@@ -33,5 +34,12 @@ export class MovieController {
    */
   handleSlideTopTen(slideNum) {
     topTenView.slide(slideNum);
+  }
+  /**
+   * Handles the reset of the top ten slider on screen resize.
+   */
+  handleTopTenSlideReset() {
+    topTenSliderView.resetActiveSliderOnScreenResize();
+    topTenView.slide(0);
   }
 }
