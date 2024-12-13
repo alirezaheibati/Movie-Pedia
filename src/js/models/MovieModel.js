@@ -15,4 +15,11 @@ export default class MovieModel {
      */
     this.searchType = "t";
   }
+  /**
+   * Sets the search type.
+   * @param {string} type - The search type ('t' for movie titles, 's' for TV series information).
+   */
+  setSearchType(type) {
+    this.searchType = type;
+  }
 }
