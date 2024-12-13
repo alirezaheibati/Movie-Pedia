@@ -59,4 +59,12 @@ export class MovieController {
   handleSearchFormSubmit(searchTerm) {
     this.movieModel.loadMoviInformation(searchTerm);
   }
+  /**
+   * Handles setting the movie search type.
+   * @param {string} type - The type of search (movie or series).
+   */
+  handleMovieSearchType(type) {
+    if (type !== this.movieModel.searchType)
+      this.movieModel.setSearchType(type);
+  }
 }
