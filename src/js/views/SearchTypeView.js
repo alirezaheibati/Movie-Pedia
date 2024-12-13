@@ -24,9 +24,9 @@ class SearchTypeView {
       );
       btn.classList.add("text-[#ea2a49]");
       if (btn.classList.contains("movie-toggler")) {
-        handle("t");
+        handle("movie");
       } else {
-        handle("s");
+        handle("series");
       }
     });
   }
