@@ -27,6 +27,20 @@ class SearchBoxView {
       }, 10);
     });
   }
+  /**
+   * Adds an event handler to the search form submit event.
+   * @param {Function} handler - The function to handle the form submission.
+   */
+  addHandlerToSearchFormSubmit(handler) {
+    this._parentElement.addEventListener("submit", (e) => {
+      e.preventDefault();
+      let searchTerm = this._parentElement.querySelector(
+        "#movie-search-input"
+      ).value;
+      if (searchTerm.trim() === "") return;
+      handler(searchTerm.trim());
+    });
+  }
 }
 const searchBoxView = new SearchBoxView();
 export default searchBoxView;
