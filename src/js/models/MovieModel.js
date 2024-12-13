@@ -13,7 +13,7 @@ export default class MovieModel {
      * 't' represents movie title search.
      * 's' represents serial titile search
      */
-    this.searchType = "t";
+    this.searchType = "movie";
   }
   /**
    * Sets the search type.
