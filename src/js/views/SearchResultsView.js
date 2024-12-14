@@ -20,7 +20,9 @@ class SearchResultsView extends View {
     return this._data
       .map((movie) => {
         return `
-       <div class="bg-[#23252B] p-4 rounded-lg lg:w-[49.5%] mb-4">
+       <div class="bg-[#23252B] cursor-pointer hover:opacity-80 p-4 rounded-lg lg:w-[49.5%] mb-4 search-item-box" data-imdb-id="${
+         movie.imdbID
+       }">
         <div class="img-container w-full h-[300px]">
           <img src="${
             movie.Poster
