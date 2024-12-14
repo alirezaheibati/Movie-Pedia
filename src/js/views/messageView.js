@@ -19,6 +19,27 @@ class MessageView extends View {
     this._parentElement.classList.toggle("flex");
     this._parentElement.classList.toggle("hidden");
   }
+  /**
+   * Generates the HTML markup for the message box.
+   *
+   * @returns {string} - The generated HTML markup.
+   */
+  _generateMarkup() {
+    return `
+        <div
+          class="rounded-xl bg-slate-200 w-[400px] max-w-[95%] px-8 pb-4 pt-8  text-center"
+          >
+            <h2 class="text-3xl mb-2">${this._data.title}</h2>
+            <p class="mb-4" >${this._data.message}</p>
+            <button
+              id="error-btn"
+              class="error-close-btn bg-slate-800 text-slate-200 rounded-lg px-8 py-2"
+              >
+              OK
+            </button>
+        </div>
+        `;
+  }
 }
 const messageView = new MessageView();
 export default messageView;
