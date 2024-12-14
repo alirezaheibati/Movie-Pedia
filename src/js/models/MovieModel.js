@@ -27,6 +27,25 @@ export default class MovieModel {
     this.searchType = type;
   }
   /**
+   * Fetches detailed information for a list of movies based on their IDs.
+   * Utilizes the OMDB API to retrieve movie data concurrently.
+   *
+   * @param {Array<string>} movieIds - An array of movie IDs to fetch information for.
+   * @returns {Promise<void>} Updates the searchResults property with fetched movie data.
+   * @throws Will throw the error if the fetch operation fails.
+   */
+  async fetchMovies(movieIds) {
+    const fetchPromises = movieIds.map((id) =>
+      getJSON(`${API_URL}apikey=${API_KEY}&i=${id}`)
+    );
+    try {
+      const movies = await Promise.all(fetchPromises);
+      this.searchResults = [...movies];
+    } catch (err) {
+      throw err;
+    }
+  }
+  /**
    * Loads ten movies/series IMDB Ids based on the search query and current search type.
    * @param {string} query - The search query.
    * @throws Will throw an error if the fetch operation fails.
