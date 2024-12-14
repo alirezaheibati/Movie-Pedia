@@ -17,6 +17,7 @@ export default class MovieModel {
      */
     this.searchType = "movie";
     this.searchResults = [];
+    this.searchIds = [];
   }
   /**
    * Sets the search type.
@@ -26,7 +27,7 @@ export default class MovieModel {
     this.searchType = type;
   }
   /**
-   * Loads movie information based on the search query and current search type.
+   * Loads ten movies/series IMDB Ids based on the search query and current search type.
    * @param {string} query - The search query.
    * @throws Will throw an error if the fetch operation fails.
    */
@@ -35,7 +36,10 @@ export default class MovieModel {
       const data = await getJSON(
         `${API_URL}apikey=${API_KEY}&s=${query}&type=${this.searchType}`
       );
-      this.searchResults = data;
+      if (data.Response === "False") {
+        throw data;
+      }
+      this.searchIds = data.Search.map((item) => item.imdbID);
     } catch (err) {
       throw err;
     }
