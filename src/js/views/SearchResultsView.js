@@ -58,6 +58,12 @@ class SearchResultsView extends View {
       })
       .join("");
   }
+  /**
+   * Scrolls the search results into view smoothly.
+   */
+  scrollToResults() {
+    this._parentElement.scrollIntoView({ behavior: "smooth" });
+  }
 }
 const searchResultsView = new SearchResultsView();
 export default searchResultsView;
