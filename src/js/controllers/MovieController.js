@@ -6,6 +6,7 @@ import topTenSliderView from "../views/TopTenSliderViwe";
 import searchTypeView from "../views/SearchTypeView";
 import searchResultsView from "../views/SearchResultsView";
 import messageView from "../views/messageView";
+import overlayMovieView from "../views/OverlayMovieView";
 /**
  * MovieController class that manages the interaction between the model and views.
  * It handles user interactions, fetches movie data, and updates the views accordingly.
@@ -34,6 +35,10 @@ export class MovieController {
       this.handleMovieSearchType.bind(this)
     );
     messageView.addHandleToCloseMessageBox();
+    searchResultsView.addHandlerShowFullInfo(
+      this.handleShowingMovieOvarlayInfo.bind(this)
+    );
+    overlayMovieView.addHandleToCloseMovieOverlay();
   }
   /**
    * Renders the top ten movies using the model.
@@ -85,5 +90,21 @@ export class MovieController {
   handleMovieSearchType(type) {
     if (type !== this.movieModel.searchType)
       this.movieModel.setSearchType(type);
+  }
+  /**
+   * Handles showing the overlay with movie information.
+   * @param {string} movieId - The ID of the movie to show in the overlay.
+   */
+  handleShowingMovieOvarlayInfo(movieId) {
+    //find the index number of clicked movie box
+    const indexNum = this.movieModel.searchResults.findIndex(
+      (movie) => movie.imdbID === movieId
+    );
+    //copy clicked data object to movieModel.searchResults property
+    this.movieModel.ovelayedMovieInfo = {
+      ...this.movieModel.searchResults[indexNum],
+    };
+    overlayMovieView.toggleOverlay();
+    overlayMovieView.render(this.movieModel.ovelayedMovieInfo);
   }
 }
