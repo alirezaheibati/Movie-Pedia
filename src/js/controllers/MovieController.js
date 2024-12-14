@@ -5,6 +5,7 @@ import searchTypeView from "../views/SearchTypeView";
 import topTenSliderView from "../views/TopTenSliderViwe";
 import searchTypeView from "../views/SearchTypeView";
 import searchResultsView from "../views/SearchResultsView";
+import messageView from "../views/messageView";
 /**
  * MovieController class that manages the interaction between the model and views.
  * It handles user interactions, fetches movie data, and updates the views accordingly.
@@ -32,6 +33,7 @@ export class MovieController {
     searchTypeView.addHandlerSearchTypeSelector(
       this.handleMovieSearchType.bind(this)
     );
+    messageView.addHandleToCloseMessageBox();
   }
   /**
    * Renders the top ten movies using the model.
@@ -61,11 +63,19 @@ export class MovieController {
    */
   async handleSearchFormSubmit(searchTerm) {
     try {
+      searchResultsView.toggleSpinner();
       await this.movieModel.loadMoviInformation(searchTerm);
       await this.movieModel.fetchMovies(this.movieModel.searchIds);
       searchResultsView.render(this.movieModel.searchResults);
+      searchResultsView.toggleSpinner();
+      searchResultsView.scrollToResults();
     } catch (err) {
-      console.log(err);
+      searchResultsView.toggleSpinner();
+      messageView.toggleMessageBox();
+      messageView.render({
+        title: err.Error,
+        message: "Double check search term and try again.",
+      });
     }
   }
   /**
