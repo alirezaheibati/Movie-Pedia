@@ -39,6 +39,9 @@ export class MovieController {
       this.handleShowingMovieOvarlayInfo.bind(this)
     );
     overlayMovieView.addHandleToCloseMovieOverlay();
+    topTenView.addHandlerShowTopTenOverlay(
+      this.handleShowingTopTenOvarlayInfo.bind(this)
+    );
   }
   /**
    * Renders the top ten movies using the model.
@@ -103,6 +106,22 @@ export class MovieController {
     //copy clicked data object to movieModel.searchResults property
     this.movieModel.ovelayedMovieInfo = {
       ...this.movieModel.searchResults[indexNum],
+    };
+    overlayMovieView.toggleOverlay();
+    overlayMovieView.render(this.movieModel.ovelayedMovieInfo);
+  }
+  /**
+   * Handles showing the overlay with Top ten information.
+   * @param {string} movieId - The ID of the movie to show in the overlay.
+   */
+  handleShowingTopTenOvarlayInfo(movieId) {
+    //find the index number of clicked top ten movies
+    const indexNum = this.movieModel.topTen.findIndex(
+      (movie) => movie.imdbID === movieId
+    );
+    //copy clicked data object to movieModel.searchResults property
+    this.movieModel.ovelayedMovieInfo = {
+      ...this.movieModel.topTen[indexNum],
     };
     overlayMovieView.toggleOverlay();
     overlayMovieView.render(this.movieModel.ovelayedMovieInfo);
