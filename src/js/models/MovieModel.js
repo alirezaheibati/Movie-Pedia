@@ -24,6 +24,8 @@ export default class MovieModel {
      * @property {Array} searchIds - Stores the list of movie IDs retrieved from the initial search query.
      */
     this.searchIds = [];
+    // Object to store data of the movie to be rendered in overlay
+    this.ovelayedMovieInfo = {};
   }
   /**
    * Sets the search type.
