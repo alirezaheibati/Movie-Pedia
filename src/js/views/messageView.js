@@ -46,7 +46,7 @@ class MessageView extends View {
    * - Checks if the clicked target has the class 'error-close-btn'.
    * - Calls the _hideMessageBox method to hide the message box.
    */
-  addHandleToCleseMessageBox() {
+  addHandleToCloseMessageBox() {
     this._parentElement.addEventListener("click", (e) => {
       if (e.target.classList.contains("error-close-btn")) {
         this.toggleMessageBox();
