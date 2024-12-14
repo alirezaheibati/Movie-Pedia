@@ -21,8 +21,9 @@ class TopTenView extends View {
     return this._data
       .map((movie) => {
         return `
-            <div class="w-[9%] h-full flex justify-start items-end text-slate-50 relative rounded-xl bg-cover bg-no-repeat after:content-[''] after:absolute after:left-0 after:top-0 after:w-full after:h-full after:rounded-xl  after:bg-gradient-to-t after:from-[#041023] after:to-transparent"
-            style="background-image: url(${movie.Poster});">
+            <div class="top-movies-box w-[9%] cursor-pointer hover:opacity-80 h-full flex justify-start items-end text-slate-50 relative rounded-xl bg-cover bg-no-repeat after:content-[''] after:absolute after:left-0 after:top-0 after:w-full after:h-full after:rounded-xl  after:bg-gradient-to-t after:from-[#041023] after:to-transparent"
+            style="background-image: url(${movie.Poster});"
+            data-imdb-id="${movie.imdbID}">
                 <div class="z-10 w-full p-4">
                     <button class="absolute right-4 top-4 text-3xl"><i class="fa-regular fa-heart text-[#ea2a49]"></i></button>
                     <h3 class="text-2xl whitespace-nowrap overflow-hidden text-ellipsis">${movie.Title}</h3>
@@ -59,6 +60,21 @@ class TopTenView extends View {
    */
   addHandlerToSliderResize(handle) {
     window.addEventListener("resize", handle);
+  }
+  /**
+   * Adds a click event listener to the parent element to handle showing the top ten overlay.
+   * When one of top ten movies clicked, it extracts the movie ID
+   * and calls the provided handler function with that ID.
+   *
+   * @param {Function} handle - The function to call with the movie ID when a top-movies-box element is clicked.
+   */
+  addHandlerShowTopTenOverlay(handle) {
+    this._parentElement.addEventListener("click", (e) => {
+      const btn = e.target.closest(".top-movies-box");
+      if (!btn) return;
+      const movieId = btn.dataset.imdbId;
+      handle(movieId);
+    });
   }
 }
 const topTenView = new TopTenView();
