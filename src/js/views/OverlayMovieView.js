@@ -10,6 +10,12 @@ class OverlayMovieView extends View {
    * @protected
    */
   _parentElement = document.getElementById("overlay-content-container");
+  /**
+   * Hides/Shows the overlay box by toggleing CSS 'hidden' class.
+   */
+  toggleOverlay() {
+    this._parentElement.parentElement.classList.toggle("hidden");
+  }
 }
 const overlayMovieView = new OverlayMovieView();
 export default overlayMovieView;
