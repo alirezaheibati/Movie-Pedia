@@ -10,6 +10,54 @@ class SearchResultsView extends View {
    * @protected
    */
   _parentElement = document.getElementById("search-results-tab");
+  /**
+   * Generates the markup for the each search results item.
+   *
+   * @returns {string} The HTML markup for the search results item.
+   * @protected
+   */
+  _generateMarkup() {
+    return this._data
+      .map((movie) => {
+        return `
+       <div class="bg-[#23252B] p-4 rounded-lg lg:w-[49.5%] mb-4">
+        <div class="img-container w-full h-[300px]">
+          <img src="${
+            movie.Poster
+          }" alt="film poster" class="rounded-lg h-[300px] w-full object-cover object-top">
+        </div>
+        <div class="movie title flex justify-between items-center pt-3">
+          <h3 class="text-2xl whitespace-nowrap overflow-hidden text-ellipsis">${
+            movie.Title
+          }</h3>
+          <button class="text-2xl"><i class="fa-regular fa-heart text-[#ea2a49]"></i></button>
+        </div>
+        <ul class="flex justify-start items-center p-1 mt-3 rounded-l-lg gap-2 text-[#AFAFAF] bg-gradient-to-r from-[#1C1C22] to-transparent ">
+          <li title="Runtime"><i class="fa-solid fa-clock-rotate-left text-sm"></i> ${
+            movie.Runtime === "N/A" ? "Unknown" : movie.Runtime
+          }</li>
+          <li title="Released"><i class="fa-regular fa-calendar-check "></i> ${
+            movie.Year === "N/A" ? "Unknown" : movie.Year
+          }</li>
+          <li title="imdbVotes"><i class="fa-solid fa-star-half-stroke "></i> ${
+            movie.imdbRating === "N/A" ? "Unknown" : movie.imdbRating
+          } (${movie.imdbVotes === "N/A" ? "Unknown" : movie.imdbVotes})</li>
+        </ul>
+        <p class="text-[#AFAFAF] mt-2 text-justify">${movie.Plot}</p>
+        <hr class="border-slate-500 my-2">
+        <ul class="text-[#AFAFAF] ">
+          <li title="Director"><i class="fa-solid fa-user-tie"></i><span class="font-bold"> Director: </span> ${
+            movie.Director === "N/A" ? "Unknown" : movie.Director
+          }</li>
+          <li title="run time" class="mt-1 whitespace-nowrap overflow-hidden text-ellipsis"><i class="fa-solid fa-user-group "></i><span class="font-bold"> Actors: </span> ${
+            movie.Actors === "N/A" ? "Unknown" : movie.Actors
+          }</li>
+        </ul>
+       </div>
+            `;
+      })
+      .join("");
+  }
 }
 const searchResultsView = new SearchResultsView();
 export default searchResultsView;
