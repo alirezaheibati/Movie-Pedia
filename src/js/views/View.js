@@ -22,4 +22,12 @@ export default class View {
     this._parentElement.innerHTML = "";
     this._parentElement.insertAdjacentHTML("afterbegin", markup);
   }
+  /**
+   * Method to toggle render the spinner.
+   * Call this function to show/hide the spinner when loading data or performing other asynchronous operations.
+   */
+  toggleSpinner() {
+    document.getElementById("spinner-container").classList.toggle("hidden");
+    document.getElementById("spinner-container").classList.toggle("flex");
+  }
 }
