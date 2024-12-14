@@ -12,11 +12,17 @@ export default class MovieModel {
     this.topTen = topTenMovies;
     /**
      * defines the type of search.
-     * 't' represents movie title search.
-     * 's' represents serial titile search
+     * 'movie' represents movie title search.
+     * 'series' represents serial titile search
      */
     this.searchType = "movie";
+    /**
+     * @property {Array} searchResults - Stores the detailed information of movies fetched from the API.
+     */
     this.searchResults = [];
+    /**
+     * @property {Array} searchIds - Stores the list of movie IDs retrieved from the initial search query.
+     */
     this.searchIds = [];
   }
   /**
