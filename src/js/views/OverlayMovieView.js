@@ -83,6 +83,16 @@ class OverlayMovieView extends View {
           </div>
             `;
   }
+  /**
+   * Adds an event handler to close the overlay container when the close button is clicked.
+   */
+  addHandleToCloseMovieOverlay() {
+    this._parentElement.parentElement
+      .querySelector("#overlay-close-btn")
+      .addEventListener("click", () => {
+        this.toggleOverlay();
+      });
+  }
 }
 const overlayMovieView = new OverlayMovieView();
 export default overlayMovieView;
