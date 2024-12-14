@@ -66,6 +66,18 @@ class SearchResultsView extends View {
   scrollToResults() {
     this._parentElement.scrollIntoView({ behavior: "smooth" });
   }
+  /**
+   * Adds an event handler to show full information of a search item.
+   * @param {Function} handle - The function to handle showing full information.
+   */
+  addHandlerShowFullInfo(handle) {
+    this._parentElement.addEventListener("click", (e) => {
+      const btn = e.target.closest(".search-item-box");
+      if (!btn) return;
+      const movieId = btn.dataset.imdbId;
+      handle(movieId);
+    });
+  }
 }
 const searchResultsView = new SearchResultsView();
 export default searchResultsView;
