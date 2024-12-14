@@ -4,6 +4,7 @@ import searchBoxView from "../views/SearchBoxView";
 import searchTypeView from "../views/SearchTypeView";
 import topTenSliderView from "../views/TopTenSliderViwe";
 import searchTypeView from "../views/SearchTypeView";
+import searchResultsView from "../views/SearchResultsView";
 /**
  * MovieController class that manages the interaction between the model and views.
  * It handles user interactions, fetches movie data, and updates the views accordingly.
@@ -53,11 +54,19 @@ export class MovieController {
     topTenView.slide(0);
   }
   /**
-   * Handles the search form submission by loading movie information.
+   * Handles the search form submission, fetches movie information, and updates the view.
+   *
    * @param {string} searchTerm - The search term entered by the user.
+   * @returns {Promise<void>} Updates the search results view with the fetched movie data.
    */
-  handleSearchFormSubmit(searchTerm) {
-    this.movieModel.loadMoviInformation(searchTerm);
+  async handleSearchFormSubmit(searchTerm) {
+    try {
+      await this.movieModel.loadMoviInformation(searchTerm);
+      await this.movieModel.fetchMovies(this.movieModel.searchIds);
+      searchResultsView.render(this.movieModel.searchResults);
+    } catch (err) {
+      console.log(err);
+    }
   }
   /**
    * Handles setting the movie search type.
