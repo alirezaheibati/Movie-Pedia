@@ -17,6 +17,22 @@ class TabsView {
       tab.classList.remove("text-[#ea2a49]");
     });
   }
+  /**
+   * Adds an event handler for tab clicks.
+   * When a tab item is clicked, the specific style is removed from all tab items,
+   * the clicked tab item gets the specific style added, and the handler is called with the tab identifier.
+   * @param {Function} handle - The function to handle tab clicks.
+   */
+  addHandlerTabsClick(handle) {
+    this._parentElement.addEventListener("click", (e) => {
+      const btn = e.target.closest(".tab-item");
+      if (!btn) return;
+      this._removeTabsStyle();
+      btn.classList.add("text-[#ea2a49]");
+      const identifier = btn.dataset.tabIdentifier;
+      handle(identifier);
+    });
+  }
 }
 const tabsView = new TabsView();
 export default tabsView;
