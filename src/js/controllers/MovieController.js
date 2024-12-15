@@ -168,4 +168,36 @@ export class MovieController {
     }
     console.log(this.movieModel.favorites);
   }
+  /**
+   * Handles the favorite button click in the overlay to add/remove movie in overlay form favorites.
+   */
+  handleOverlayFavoriteBtn() {
+    //get movie id rendering in overlay section
+    const movieId = this.movieModel.ovelayedMovieInfo.imdbID;
+    //revert favorite property in overlay
+    this.movieModel.ovelayedMovieInfo.favorite =
+      !this.movieModel.ovelayedMovieInfo.favorite;
+    //if the movie is already in favorites array remove it otherwise add movie to favorites
+    if (this.movieModel.favorites.some((movie) => movie.imdbID === movieId)) {
+      this.movieModel.favorites = [
+        ...this.movieModel.favorites.filter(
+          (movie) => movie.imdbID !== movieId
+        ),
+      ];
+    } else {
+      this.movieModel.favorites.push(this.movieModel.ovelayedMovieInfo);
+    }
+
+    this.movieModel.storageFavorites();
+    //modify favorite property of topTen and searchResults
+    this.movieModel.topTen.forEach((movie) => {
+      if (movie.imdbID === movieId) movie.favorite = !movie.favorite;
+    });
+    this.movieModel.searchResults.forEach((movie) => {
+      if (movie.imdbID === movieId) movie.favorite = !movie.favorite;
+    });
+    overlayMovieView.render(this.movieModel.ovelayedMovieInfo);
+    searchResultsView.render(this.movieModel.searchResults);
+    topTenView.render(this.movieModel.topTen);
+  }
 }
