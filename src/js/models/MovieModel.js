@@ -38,6 +38,7 @@ export default class MovieModel {
   }
   /**
    * Fetches detailed information for a list of movies based on their IDs.
+   * Sets the favorite property to 'true' if the movie is in the favorites list, otherwise 'false'.
    * Utilizes the OMDB API to retrieve movie data concurrently.
    *
    * @param {Array<string>} movieIds - An array of movie IDs to fetch information for.
@@ -50,7 +51,13 @@ export default class MovieModel {
     );
     try {
       const movies = await Promise.all(fetchPromises);
-      this.searchResults = [...movies];
+      this.searchResults = movies.map((movie) => {
+        if (
+          this.favorites.some((favorite) => favorite.imdbID === movie.imdbID)
+        ) {
+          return { ...movie, favorite: true };
+        } else return { ...movie, favorite: false };
+      });
     } catch (err) {
       throw err;
     }
