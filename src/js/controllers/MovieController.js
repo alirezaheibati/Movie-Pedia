@@ -18,6 +18,7 @@ export class MovieController {
    */
   constructor() {
     this.movieModel = new MovieModel();
+    this.movieModel.loadFavorites();
     this.renderTopTenMovies();
     this.setupEventHandlers();
   }
@@ -42,9 +43,12 @@ export class MovieController {
     topTenView.addHandlerShowTopTenOverlay(
       this.handleShowingTopTenOvarlayInfo.bind(this)
     );
+    overlayMovieView.addHandlerToFavoriteBtn(
+      this.handleOverlayFavoriteBtn.bind(this)
+    );
   }
   /**
-   * Renders the top ten movies using the model.
+   * load and then Renders the top ten movies.
    */
   renderTopTenMovies() {
     topTenView.render(this.movieModel.topTen);
@@ -96,34 +100,70 @@ export class MovieController {
   }
   /**
    * Handles showing the overlay with movie information.
+   * adds/removes clicked movie from favorites.
+   *
    * @param {string} movieId - The ID of the movie to show in the overlay.
+   * @param {string} action - identifier that specify add/remove movie from favorite or just show overlay information.
    */
-  handleShowingMovieOvarlayInfo(movieId) {
+  handleShowingMovieOvarlayInfo(movieId, action) {
     //find the index number of clicked movie box
     const indexNum = this.movieModel.searchResults.findIndex(
       (movie) => movie.imdbID === movieId
     );
-    //copy clicked data object to movieModel.searchResults property
-    this.movieModel.ovelayedMovieInfo = {
-      ...this.movieModel.searchResults[indexNum],
-    };
-    overlayMovieView.toggleOverlay();
-    overlayMovieView.render(this.movieModel.ovelayedMovieInfo);
+    if (action === "favorite") {
+      if (this.movieModel.searchResults[indexNum].favorite === true) {
+        this.movieModel.searchResults[indexNum].favorite = false;
+        this.movieModel.favorites = this.movieModel.favorites.filter(
+          (movie) => movie.imdbID !== movieId
+        );
+      } else {
+        this.movieModel.searchResults[indexNum].favorite = true;
+        this.movieModel.favorites.push(this.movieModel.searchResults[indexNum]);
+      }
+      this.movieModel.storageFavorites();
+      searchResultsView.render(this.movieModel.searchResults);
+    } else {
+      //copy clicked data object to movieModel.searchResults property
+      this.movieModel.ovelayedMovieInfo = {
+        ...this.movieModel.searchResults[indexNum],
+      };
+      overlayMovieView.toggleOverlay();
+      overlayMovieView.render(this.movieModel.ovelayedMovieInfo);
+    }
+    console.log(this.movieModel.favorites);
   }
   /**
-   * Handles showing the overlay with Top ten information.
+   * Handles showing the overlay with Top ten information
+   * adds/removes clicked movie from favorites.
+   *
    * @param {string} movieId - The ID of the movie to show in the overlay.
+   * @param {string} action - identifier that specify add/remove movie from favorite or just show overlay information.
    */
-  handleShowingTopTenOvarlayInfo(movieId) {
+  handleShowingTopTenOvarlayInfo(movieId, action) {
     //find the index number of clicked top ten movies
     const indexNum = this.movieModel.topTen.findIndex(
       (movie) => movie.imdbID === movieId
     );
-    //copy clicked data object to movieModel.searchResults property
-    this.movieModel.ovelayedMovieInfo = {
-      ...this.movieModel.topTen[indexNum],
-    };
-    overlayMovieView.toggleOverlay();
-    overlayMovieView.render(this.movieModel.ovelayedMovieInfo);
+    if (action === "favorite") {
+      if (this.movieModel.topTen[indexNum].favorite === true) {
+        this.movieModel.topTen[indexNum].favorite = false;
+        this.movieModel.favorites = this.movieModel.favorites.filter(
+          (movie) => movie.imdbID !== movieId
+        );
+      } else {
+        this.movieModel.topTen[indexNum].favorite = true;
+        this.movieModel.favorites.push(this.movieModel.topTen[indexNum]);
+      }
+      this.movieModel.storageFavorites();
+      topTenView.render(this.movieModel.topTen);
+    } else {
+      //copy clicked data object to movieModel.searchResults property
+      this.movieModel.ovelayedMovieInfo = {
+        ...this.movieModel.topTen[indexNum],
+      };
+      overlayMovieView.toggleOverlay();
+      overlayMovieView.render(this.movieModel.ovelayedMovieInfo);
+    }
+    console.log(this.movieModel.favorites);
   }
 }
