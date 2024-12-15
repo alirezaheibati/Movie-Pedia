@@ -86,4 +86,12 @@ export default class MovieModel {
   storageFavorites() {
     localStorage.setItem("favorite", JSON.stringify(this.favorites));
   }
+  /**
+   * Loads favorite movies from localStorage and updates the state.
+   * Parses the JSON string retrieved from localStorage and sets this.favorites.
+   */
+  loadFavorites() {
+    const storage = localStorage.getItem("favorite");
+    if (storage) this.favorites = JSON.parse(storage);
+  }
 }
