@@ -48,9 +48,11 @@ export class MovieController {
     );
   }
   /**
-   * load and then Renders the top ten movies.
+   * load topTen movies and adjust favorite property according to moveiModel.favorite array
+   * then Renders the top ten movies.
    */
   renderTopTenMovies() {
+    this.movieModel.loadTopTenMovies();
     topTenView.render(this.movieModel.topTen);
   }
   /**
