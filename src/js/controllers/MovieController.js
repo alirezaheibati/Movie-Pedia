@@ -7,6 +7,8 @@ import searchTypeView from "../views/SearchTypeView";
 import searchResultsView from "../views/SearchResultsView";
 import messageView from "../views/messageView";
 import overlayMovieView from "../views/OverlayMovieView";
+import favoriteMoviesView from "../views/FavoriteMoviesView";
+import tabsView from "../views/TabsView";
 /**
  * MovieController class that manages the interaction between the model and views.
  * It handles user interactions, fetches movie data, and updates the views accordingly.
@@ -46,6 +48,10 @@ export class MovieController {
     overlayMovieView.addHandlerToFavoriteBtn(
       this.handleOverlayFavoriteBtn.bind(this)
     );
+    favoriteMoviesView.addHandlerShowFavoriteInfo(
+      this.handleShowingFavoriteOvarlayInfo.bind(this)
+    );
+    tabsView.addHandlerTabsClick(this.handleTagToggle.bind(this));
   }
   /**
    * load topTen movies and adjust favorite property according to moveiModel.favorite array
@@ -158,6 +164,7 @@ export class MovieController {
       }
       this.movieModel.storageFavorites();
       topTenView.render(this.movieModel.topTen);
+      favoriteMoviesView.render(this.movieModel.favorites);
     } else {
       //copy clicked data object to movieModel.searchResults property
       this.movieModel.ovelayedMovieInfo = {
@@ -198,6 +205,49 @@ export class MovieController {
     });
     overlayMovieView.render(this.movieModel.ovelayedMovieInfo);
     searchResultsView.render(this.movieModel.searchResults);
+    favoriteMoviesView.render(this.movieModel.favorites);
     topTenView.render(this.movieModel.topTen);
+  }
+  /**
+   * Handles showing the overlay with movie information.
+   * adds/removes clicked movie from favorites.
+   *
+   * @param {string} movieId - The ID of the movie to show in the overlay.
+   * @param {string} action - identifier that specify add/remove movie from favorite or just show overlay information.
+   */
+  handleShowingFavoriteOvarlayInfo(movieId, action) {
+    //find the index number of clicked movie box
+    const indexNum = this.movieModel.favorites.findIndex(
+      (movie) => movie.imdbID === movieId
+    );
+    if (action === "favorite") {
+      this.movieModel.favorites = this.movieModel.favorites.filter(
+        (movie) => movie.imdbID !== movieId
+      );
+
+      this.movieModel.storageFavorites();
+      favoriteMoviesView.render(this.movieModel.favorites);
+    } else {
+      //copy clicked data object to movieModel.searchResults property
+      this.movieModel.ovelayedMovieInfo = {
+        ...this.movieModel.favorites[indexNum],
+      };
+      overlayMovieView.toggleOverlay();
+      overlayMovieView.render(this.movieModel.ovelayedMovieInfo);
+    }
+  }
+  /**
+   * Handles toggling between the favorite movies tab and the search results tab.
+   * @param {string} identifier - The identifier to determine which tab to show.
+   */
+  handleTagToggle(identifier) {
+    if (identifier === "favorite") {
+      favoriteMoviesView.showFavoritesTab();
+      searchResultsView.hideResultsTab();
+      favoriteMoviesView.render(this.movieModel.favorites);
+    } else {
+      favoriteMoviesView.hideFavoritesTab();
+      searchResultsView.showResultsTab();
+    }
   }
 }
