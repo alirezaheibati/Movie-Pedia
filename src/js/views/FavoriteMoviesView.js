@@ -85,6 +85,20 @@ class FavoriteMoviesView extends View {
       handle(movieId, "info");
     });
   }
+  /**
+   * Shows the Favorite movies tab.
+   */
+  showFavoritesTab() {
+    this._parentElement.classList.remove("hidden");
+    this._parentElement.classList.add("lg:flex");
+  }
+  /**
+   * Hides the Favorite movies tab.
+   */
+  hideFavoritesTab() {
+    this._parentElement.classList.remove("lg:flex");
+    this._parentElement.classList.add("hidden");
+  }
 }
 const favoriteMoviesView = new FavoriteMoviesView();
 export default favoriteMoviesView;
