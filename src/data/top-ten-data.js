@@ -29,7 +29,7 @@ const topTenMovies = [
     BoxOffice: "$28,767,189",
     Production: "N/A",
     Website: "N/A",
-    Response: "True",
+    favorite: false,
   },
   {
     Title: "The Godfather",
@@ -61,7 +61,7 @@ const topTenMovies = [
     BoxOffice: "$136,381,073",
     Production: "N/A",
     Website: "N/A",
-    Response: "True",
+    favorite: false,
   },
   {
     Title: "The Dark Knight",
@@ -93,7 +93,7 @@ const topTenMovies = [
     BoxOffice: "$534,987,076",
     Production: "N/A",
     Website: "N/A",
-    Response: "True",
+    favorite: false,
   },
   {
     Title: "The Godfather Part II",
@@ -125,7 +125,7 @@ const topTenMovies = [
     BoxOffice: "$47,834,595",
     Production: "N/A",
     Website: "N/A",
-    Response: "True",
+    favorite: false,
   },
   {
     Title: "12 Angry Men",
@@ -157,7 +157,7 @@ const topTenMovies = [
     BoxOffice: "N/A",
     Production: "N/A",
     Website: "N/A",
-    Response: "True",
+    favorite: false,
   },
   {
     Title: "The Lord of the Rings: The Return of the King",
@@ -189,7 +189,7 @@ const topTenMovies = [
     BoxOffice: "$381,878,219",
     Production: "N/A",
     Website: "N/A",
-    Response: "True",
+    favorite: false,
   },
   {
     Title: "Schindler's List",
@@ -221,7 +221,7 @@ const topTenMovies = [
     BoxOffice: "$96,898,818",
     Production: "N/A",
     Website: "N/A",
-    Response: "True",
+    favorite: false,
   },
   {
     Title: "Pulp Fiction",
@@ -253,7 +253,7 @@ const topTenMovies = [
     BoxOffice: "$107,928,762",
     Production: "N/A",
     Website: "N/A",
-    Response: "True",
+    favorite: false,
   },
   {
     Title: "The Lord of the Rings: The Fellowship of the Ring",
@@ -285,7 +285,7 @@ const topTenMovies = [
     BoxOffice: "$319,372,078",
     Production: "N/A",
     Website: "N/A",
-    Response: "True",
+    favorite: false,
   },
   {
     Title: "The Good, the Bad and the Ugly",
@@ -317,7 +317,7 @@ const topTenMovies = [
     BoxOffice: "$25,100,000",
     Production: "N/A",
     Website: "N/A",
-    Response: "True",
+    favorite: false,
   },
 ];
 export default topTenMovies;
