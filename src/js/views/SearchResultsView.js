@@ -87,6 +87,20 @@ class SearchResultsView extends View {
       handle(movieId, "info");
     });
   }
+  /**
+   * Shows the search results tab.
+   */
+  showResultsTab() {
+    this._parentElement.classList.remove("hidden");
+    this._parentElement.classList.add("lg:flex");
+  }
+  /**
+   * Hides the search results tab.
+   */
+  hideResultsTab() {
+    this._parentElement.classList.remove("lg:flex");
+    this._parentElement.classList.add("hidden");
+  }
 }
 const searchResultsView = new SearchResultsView();
 export default searchResultsView;
