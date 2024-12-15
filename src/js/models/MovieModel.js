@@ -26,6 +26,8 @@ export default class MovieModel {
     this.searchIds = [];
     // Object to store data of the movie to be rendered in overlay
     this.ovelayedMovieInfo = {};
+    // Array of user's favorite movies stored.
+    this.favorites = [];
   }
   /**
    * Sets the search type.
