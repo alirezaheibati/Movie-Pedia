@@ -80,4 +80,10 @@ export default class MovieModel {
       throw err;
     }
   }
+  /**
+   * Converts the favorites array to a JSON string before storing it to localStorage.
+   */
+  storageFavorites() {
+    localStorage.setItem("favorite", JSON.stringify(this.favorites));
+  }
 }
