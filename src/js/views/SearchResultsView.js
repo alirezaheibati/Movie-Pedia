@@ -32,7 +32,9 @@ class SearchResultsView extends View {
           <h3 class="text-2xl whitespace-nowrap overflow-hidden text-ellipsis">${
             movie.Title
           }</h3>
-          <button class="text-2xl"><i class="fa-regular fa-heart text-[#ea2a49]"></i></button>
+          <button class="text-2xl"><i class="${
+            movie.favorite === true ? "fa-solid" : "fa-regular"
+          } fa-heart text-[#ea2a49] add-favorite-btn"></i></button>
         </div>
         <ul class="flex justify-start items-center p-1 mt-3 rounded-l-lg gap-2 text-[#AFAFAF] bg-gradient-to-r from-[#1C1C22] to-transparent ">
           <li title="Runtime"><i class="fa-solid fa-clock-rotate-left text-sm"></i> ${
@@ -67,15 +69,22 @@ class SearchResultsView extends View {
     this._parentElement.scrollIntoView({ behavior: "smooth" });
   }
   /**
-   * Adds an event handler to show full information of a search item.
-   * @param {Function} handle - The function to handle showing full information.
+   * Adds an event handler to react tu user clicks on search items.
+   * if users clicks on heart icon send 'favorite' identifier to handle function.
+   * otherwise sends 'info' identifier to handle function to show overlay container with movie info.
+   *
+   * @param {Function} handle - The function to handle showing full information or adding movie to favorites.
    */
   addHandlerShowFullInfo(handle) {
     this._parentElement.addEventListener("click", (e) => {
       const btn = e.target.closest(".search-item-box");
       if (!btn) return;
       const movieId = btn.dataset.imdbId;
-      handle(movieId);
+      if (e.target.classList.contains("add-favorite-btn")) {
+        handle(movieId, "favorite");
+        return;
+      }
+      handle(movieId, "info");
     });
   }
 }
