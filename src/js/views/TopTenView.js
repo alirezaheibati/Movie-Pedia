@@ -25,15 +25,23 @@ class TopTenView extends View {
             style="background-image: url(${movie.Poster});"
             data-imdb-id="${movie.imdbID}">
                 <div class="z-10 w-full p-4">
-                    <button class="absolute right-4 top-4 text-3xl"><i class="fa-regular fa-heart text-[#ea2a49]"></i></button>
-                    <h3 class="text-2xl whitespace-nowrap overflow-hidden text-ellipsis">${movie.Title}</h3>
+                    <button class=" absolute right-4 top-4 text-3xl "><i class="${
+                      movie.favorite === true ? "fa-solid" : "fa-regular"
+                    } fa-heart text-[#ea2a49] add-favorite-btn"></i></button>
+                    <h3 class="text-2xl whitespace-nowrap overflow-hidden text-ellipsis">${
+                      movie.Title
+                    }</h3>
                     <p class="mb-1 text-slate-200">${movie.Genre}</p>
                     <div class="flex justify-start items-start gap-3">
                         <p class="text-amber-500">
-                            <i class="fa-solid fa-star-half-stroke "></i> ${movie.imdbRating}
+                            <i class="fa-solid fa-star-half-stroke "></i> ${
+                              movie.imdbRating
+                            }
                         </p>
                         <p class="text-amber-500">
-                            <i class="fa-solid fa-clock-rotate-left text-sm"></i> ${movie.Runtime}
+                            <i class="fa-solid fa-clock-rotate-left text-sm"></i> ${
+                              movie.Runtime
+                            }
                         </p>
                     </div>
                 </div>
@@ -64,16 +72,22 @@ class TopTenView extends View {
   /**
    * Adds a click event listener to the parent element to handle showing the top ten overlay.
    * When one of top ten movies clicked, it extracts the movie ID
-   * and calls the provided handler function with that ID.
+   * if user clicks on favorite icon provide handle function to add/remove movie from favorites.
+   * if user clicks anywhere but favorite icon provide handle function to show overlay with movie information.
    *
-   * @param {Function} handle - The function to call with the movie ID when a top-movies-box element is clicked.
+   * @param {Function} handle - The function to call with the movie ID and one identifier when a top-movies-box element is clicked.
    */
   addHandlerShowTopTenOverlay(handle) {
     this._parentElement.addEventListener("click", (e) => {
       const btn = e.target.closest(".top-movies-box");
       if (!btn) return;
       const movieId = btn.dataset.imdbId;
-      handle(movieId);
+      if (e.target.classList.contains("add-favorite-btn")) {
+        console.log("favorite");
+        handle(movieId, "favorite");
+        return;
+      }
+      handle(movieId, "info");
     });
   }
 }
