@@ -9,7 +9,7 @@ export default class MovieModel {
     /**
      * Stores top ten Movies of all time information.
      */
-    this.topTen = topTenMovies;
+    this.topTen = [];
     /**
      * defines the type of search.
      * 'movie' represents movie title search.
@@ -28,6 +28,17 @@ export default class MovieModel {
     this.ovelayedMovieInfo = {};
     // Array of user's favorite movies stored.
     this.favorites = [];
+  }
+  /**
+   * Loads the top ten movies and marks the favorite ones.
+   */
+  loadTopTenMovies() {
+    topTenMovies.forEach((movie) => {
+      if (this.favorites.some((item) => item.imdbID === movie.imdbID)) {
+        movie.favorite = true;
+      }
+    });
+    this.topTen = [...topTenMovies];
   }
   /**
    * Sets the search type.
