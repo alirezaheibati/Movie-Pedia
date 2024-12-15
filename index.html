@@ -15,49 +15,29 @@
     <title>Movie Pedia</title>
   </head>
   <body class="bg-[#1C1C22] overflow-x-hidden">
+    <!-- spinner -->
+    <div
+    class="spinner h-screen w-screen left-0 top-0 z-30 hidden fixed justify-center items-center bg-black/80"
+    id="spinner-container"
+  >
+    <div
+      class="w-32 h-32 border-[10px] animate-spin border-x-red-700 border-y-transparent rounded-full"
+    ></div>
+  </div>
+          <!-- message box -->
+          <div
+          class="message-box-container hidden h-screen w-screen left-0 top-0 z-30 fixed justify-center items-center bg-black/80"
+          id="message-container">
+        </div>
+  <!-- movie info overlay -->
     <div class=" hidden fixed top-0 left-0 w-screen z-20 bg-black h-screen">
       <!-- close btn -->
-      <button class="absolute cursor-pointer z-50 bg-[#ED145B] top-3 left-3 w-8 h-8 rounded-full text-slate-50">
+      <button class="absolute cursor-pointer z-50 bg-[#ED145B] top-3 left-3 w-8 h-8 rounded-full text-slate-50"
+      id="overlay-close-btn">
         <i class="fa-solid fa-xmark"></i>
       </button>
-      <div class="overlay absolute w-full h-full left-0 top-0 z-30 bg-[url('/src/assets/poster.jpg')] bg-cover bg-no-repeat grayscale opacity-20"></div>
-      <!-- content of overlaybox -->
-      <div class="content relative z-40 px-4 py-12 w-full h-full flex flex-col md:flex-row gap-4 overflow-y-scroll">
-        <div class=" w-full">
-          <img src="src/assets/poster.jpg" alt="img" class="w-[280px] max-w-[90%] lg:w-[400px] h-auto block mx-auto rounded-2xl">
-        </div>
-        <div class="h-[500px] w-full text-[#AFAFAF] ">
-          <h1 class="text-3xl text-slate-200">Kill Bill: Vol. 1</h1>
-          <ul class="genre flex justify-start gap-3  my-2">
-            <li class="border rounded-3xl px-4 py-1">Action</li>
-            <li class="border rounded-3xl px-4 py-1">Crime</li>
-            <li class="border rounded-3xl px-4 py-1">Thriller</li>
-          </ul>
-          <p class="">Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit mollitia tenetur nobis. Enim aperiam suscipit nesciunt cum minima itaque ullam, sint quia nemo numquam commodi perspiciatis, assumenda, beatae eveniet tenetur!</p>
-          <div class="border rounded-3xl my-4 p-4">
-            <p>Director: <span class="font-bold">Quentin Tarantino</span></p>
-            <hr class="my-2">
-            <p>Casting: <span class="font-bold">Uma Thurman, David Carradine, Daryl Hannah</span></p>
-          </div>
-          <div class="border rounded-3xl my-4 p-4 flex flex-col justify-start items-start">
-              <p>Country: <span class="font-bold">United States</span></p>
-              <p>Year: <span class="font-bold">2003</span></p>
-              <p>Time: <span class="font-bold">115 min</span></p>
-              <p>BoxOffice: <span class="font-bold">$70,099,045</span></p>
-              <p>Metascore: <span class="font-bold">69/100</span></p>
-          </div>
-          <div class="py-4 sm:flex sm:justify-between sm:items-center sm:gap-[1%] md:flex-wrap">
-            <button class="w-full sm:w-[49%] md:w-full xl:w-[49%] mb-2 bg-[#FFC23C] rounded-3xl py-3 text-slate-800">
-              <a href="#">IMDB: 8.2 (1,223,388)</a>
-              <i class="fa-solid fa-link"></i>
-            </button>
-            <button class="w-full sm:w-[49%] md:w-full xl:w-[49%] relative bg-[#ED145B] rounded-3xl py-3 text-slate-800">
-              <p class="">Add To Favories <i class="fa-regular fa-heart"></i> </p>
-            </button>
-          </div>
-        </div>
-
-      </div>
+      <div id="overlay-content-container">
+    </div>
     </div>
     <header
       class="h-screen flex justify-center items-center bg-[url('/src/assets/header-bg.jpg')] bg-cover bg-no-repeat bg-right-bottom  relative"
@@ -72,7 +52,9 @@
         <img src="src/assets/logo.png" alt="logo" class="h-16" />
       </div>
       <!-- search box -->
-      <form class="bg-black/30 px-6 py-4 rounded-2xl w-[90%] sm:w-[500px]">
+       <div class="bg-black/30 rounded-2xl w-[90%] sm:w-[500px] pb-4">
+      <form class=" px-6 py-4 w-full" 
+      id="search-box-form">
         <p class="text-slate-200 text-center text-3xl mb-2 font-lobster">
           Search for <span class="text-[#ea2a49]">movies</span>
           <p class="text-slate-200 text-center mb-4">click and search for movies or series</p>
@@ -83,12 +65,13 @@
         >
           <input
             type="text"
-            id="btn"
+            id="movie-search-input"
             class="bg-slate-50 h-full w-full rounded-full outline-none pl-4 text-base placeholder:text-slate-800"
             placeholder="Search For Movies"
           />
           <button
             type="button"
+            id="movie-search-btn"
             class="w-[42px] h-[42px] flex rounded-full bg-slate-50 justify-center items-center absolute right-0 top-0 overflow-hidden"
           >
             <img
@@ -98,15 +81,16 @@
             />
           </button>
         </div>
-        <div class="text-slate-50 flex justify-center items-center gap-3 mt-4">
-          <button>
-            <i class="fa-solid fa-video text-lg text-[#ea2a49]" title="movies"></i>
-          </button>
-          <button>
-            <i class="fa-solid fa-tv " title="series"></i>
-          </button>
-        </div>
       </form>
+      <div class="text-slate-50 flex justify-center items-center gap-3" id="search-type-container">
+        <button class="type-toggler-btn movie-toggler text-[#ea2a49]">
+          <i class="fa-solid fa-video text-lg" title="movies"></i>
+        </button>
+        <button class="type-toggler-btn series-toggler text-sm">
+          <i class="fa-solid fa-tv " title="series"></i>
+        </button>
+      </div>
+    </div>
     </header>
     <!-- content section -->
     <section class="py-8 md:py-10 md:h-screen md:flex md:flex-col md:justify-between">
@@ -114,413 +98,43 @@
         <h2 class="font-lobster text-3xl text-slate-50">Top <span class="text-[#ea2a49]">10</span> </h2>
         <hr class="h-1 bg-[#ea2a49] border-[#ea2a49] mt-4 mb-8">
       </div>
-      <!-- movie slide container -->
-      <div class="w-[1000%] md:w-[500%] lg:w-[333%] xl:w-[250%] h-[400px] flex justify-around translate-x-0 transition-[transform] duration-200 ease-linear"
+      <!-- top ten movie slide container -->
+      <div class="w-[1000%] md:w-[500%] lg:w-[333%] xl:w-[250%] h-[400px] flex justify-around -translate-x-[0%] transition-[transform] duration-200 ease-linear"
       id="slider-container">
-        <!-- single movie box -->
-         <div class="w-[9%] h-full flex justify-start items-end text-slate-50 relative rounded-xl bg-[url('/src/assets/poster.jpg')] bg-cover bg-no-repeat after:content-[''] after:absolute after:left-0 after:top-0 after:w-full after:h-full after:rounded-xl  after:bg-gradient-to-t after:from-[#041023] after:to-transparent">
-          <div class="z-10 w-full p-4">
-            <button class="absolute right-4 top-4 text-3xl"><i class="fa-regular fa-heart text-[#ea2a49]"></i></button>
-            <h3 class="text-2xl whitespace-nowrap overflow-hidden text-ellipsis">From Bedrooms to Billions: The Amiga Years!</h3>
-            <p class="mb-1 text-slate-300">Action, Crime, Thriller</p>
-            <div class="flex justify-start items-start gap-3">
-              <p class="text-amber-500">
-                <i class="fa-solid fa-star-half-stroke "></i> 8.2
-              </p>
-              <p class="text-amber-500">
-                <i class="fa-solid fa-clock-rotate-left text-sm"></i> 111 min
-              </p>
-            </div>
-          </div>
-         </div>
-         <!-- 2 -->
-         <div class="w-[9%] h-[400px] flex justify-start items-end text-slate-50 relative rounded-xl bg-[url('/src/assets/poster.jpg')] bg-cover bg-no-repeat after:content-[''] after:absolute after:left-0 after:top-0 after:w-full after:h-full after:rounded-xl  after:bg-gradient-to-t after:from-[#041023] after:to-transparent">
-          <div class="z-10 w-full p-4">
-           <button class="absolute right-4 top-4 text-3xl"><i class="fa-regular fa-heart text-[#ea2a49]"></i></button>
-           <h3 class="text-2xl whitespace-nowrap overflow-hidden text-ellipsis">From Bedrooms to Billions: The Amiga Years!</h3>
-           <p class="mb-1 text-slate-300">Action2, Crime2, Thriller</p>
-           <div class="flex justify-start items-start gap-3">
-             <p class="text-amber-500">
-               <i class="fa-solid fa-star-half-stroke "></i> 8.2
-             </p>
-             <p class="text-amber-500">
-               <i class="fa-solid fa-clock-rotate-left text-sm"></i> 111 min
-             </p>
-           </div>
-         </div>
-        </div>
-        <!-- 3 -->
-        <div class="w-[9%] h-[400px] flex justify-start items-end text-slate-50 relative rounded-xl bg-[url('/src/assets/poster.jpg')] bg-cover bg-no-repeat after:content-[''] after:absolute after:left-0 after:top-0 after:w-full after:h-full after:rounded-xl  after:bg-gradient-to-t after:from-[#041023] after:to-transparent">
-          <div class="z-10 w-full p-4">
-           <button class="absolute right-4 top-4 text-3xl"><i class="fa-regular fa-heart text-[#ea2a49]"></i></button>
-           <h3 class="text-2xl whitespace-nowrap overflow-hidden text-ellipsis">From Bedrooms to Billions: The Amiga Years!</h3>
-           <p class="mb-1 text-slate-300">Action3, Crime, Thriller</p>
-           <div class="flex justify-start items-start gap-3">
-             <p class="text-amber-500">
-               <i class="fa-solid fa-star-half-stroke "></i> 8.2
-             </p>
-             <p class="text-amber-500">
-               <i class="fa-solid fa-clock-rotate-left text-sm"></i> 111 min
-             </p>
-           </div>
-         </div>
-        </div>
-                <!-- 4 -->
-                <div class="w-[9%] h-[400px] flex justify-start items-end text-slate-50 relative rounded-xl bg-[url('/src/assets/poster.jpg')] bg-cover bg-no-repeat after:content-[''] after:absolute after:left-0 after:top-0 after:w-full after:h-full after:rounded-xl  after:bg-gradient-to-t after:from-[#041023] after:to-transparent">
-                  <div class="z-10 w-full p-4">
-                   <button class="absolute right-4 top-4 text-3xl"><i class="fa-regular fa-heart text-[#ea2a49]"></i></button>
-                   <h3 class="text-2xl whitespace-nowrap overflow-hidden text-ellipsis">From Bedrooms to Billions: The Amiga Years!</h3>
-                   <p class="mb-1 text-slate-300">Action3, Crime, Thriller</p>
-                   <div class="flex justify-start items-start gap-3">
-                     <p class="text-amber-500">
-                       <i class="fa-solid fa-star-half-stroke "></i> 8.2
-                     </p>
-                     <p class="text-amber-500">
-                       <i class="fa-solid fa-clock-rotate-left text-sm"></i> 111 min
-                     </p>
-                   </div>
-                 </div>
-                </div>
-                        <!-- 5 -->
-        <div class="w-[9%] h-[400px] flex justify-start items-end text-slate-50 relative rounded-xl bg-[url('/src/assets/poster.jpg')] bg-cover bg-no-repeat after:content-[''] after:absolute after:left-0 after:top-0 after:w-full after:h-full after:rounded-xl  after:bg-gradient-to-t after:from-[#041023] after:to-transparent">
-          <div class="z-10 w-full p-4">
-           <button class="absolute right-4 top-4 text-3xl"><i class="fa-regular fa-heart text-[#ea2a49]"></i></button>
-           <h3 class="text-2xl whitespace-nowrap overflow-hidden text-ellipsis">From Bedrooms to Billions: The Amiga Years!</h3>
-           <p class="mb-1 text-slate-300">Action3, Crime, Thriller</p>
-           <div class="flex justify-start items-start gap-3">
-             <p class="text-amber-500">
-               <i class="fa-solid fa-star-half-stroke "></i> 8.2
-             </p>
-             <p class="text-amber-500">
-               <i class="fa-solid fa-clock-rotate-left text-sm"></i> 111 min
-             </p>
-           </div>
-         </div>
-        </div>
-                <!-- 6 -->
-                <div class="w-[9%] h-[400px] flex justify-start items-end text-slate-50 relative rounded-xl bg-[url('/src/assets/poster.jpg')] bg-cover bg-no-repeat after:content-[''] after:absolute after:left-0 after:top-0 after:w-full after:h-full after:rounded-xl  after:bg-gradient-to-t after:from-[#041023] after:to-transparent">
-                  <div class="z-10 w-full p-4">
-                   <button class="absolute right-4 top-4 text-3xl"><i class="fa-regular fa-heart text-[#ea2a49]"></i></button>
-                   <h3 class="text-2xl whitespace-nowrap overflow-hidden text-ellipsis">From Bedrooms to Billions: The Amiga Years!</h3>
-                   <p class="mb-1 text-slate-300">Action3, Crime, Thriller</p>
-                   <div class="flex justify-start items-start gap-3">
-                     <p class="text-amber-500">
-                       <i class="fa-solid fa-star-half-stroke "></i> 8.2
-                     </p>
-                     <p class="text-amber-500">
-                       <i class="fa-solid fa-clock-rotate-left text-sm"></i> 111 min
-                     </p>
-                   </div>
-                 </div>
-                </div>
-                        <!-- 7 -->
-        <div class="w-[9%] h-[400px] flex justify-start items-end text-slate-50 relative rounded-xl bg-[url('/src/assets/poster.jpg')] bg-cover bg-no-repeat after:content-[''] after:absolute after:left-0 after:top-0 after:w-full after:h-full after:rounded-xl  after:bg-gradient-to-t after:from-[#041023] after:to-transparent">
-          <div class="z-10 w-full p-4">
-           <button class="absolute right-4 top-4 text-3xl"><i class="fa-regular fa-heart text-[#ea2a49]"></i></button>
-           <h3 class="text-2xl whitespace-nowrap overflow-hidden text-ellipsis">From Bedrooms to Billions: The Amiga Years!</h3>
-           <p class="mb-1 text-slate-300">Action3, Crime, Thriller</p>
-           <div class="flex justify-start items-start gap-3">
-             <p class="text-amber-500">
-               <i class="fa-solid fa-star-half-stroke "></i> 8.2
-             </p>
-             <p class="text-amber-500">
-               <i class="fa-solid fa-clock-rotate-left text-sm"></i> 111 min
-             </p>
-           </div>
-         </div>
-        </div>
-              <!-- 8 -->
-              <div class="w-[9%] h-[400px] flex justify-start items-end text-slate-50 relative rounded-xl bg-[url('/src/assets/poster.jpg')] bg-cover bg-no-repeat after:content-[''] after:absolute after:left-0 after:top-0 after:w-full after:h-full after:rounded-xl  after:bg-gradient-to-t after:from-[#041023] after:to-transparent">
-                <div class="z-10 w-full p-4">
-                 <button class="absolute right-4 top-4 text-3xl"><i class="fa-regular fa-heart text-[#ea2a49]"></i></button>
-                 <h3 class="text-2xl whitespace-nowrap overflow-hidden text-ellipsis">From Bedrooms to Billions: The Amiga Years!</h3>
-                 <p class="mb-1 text-slate-300">Action3, Crime, Thriller</p>
-                 <div class="flex justify-start items-start gap-3">
-                   <p class="text-amber-500">
-                     <i class="fa-solid fa-star-half-stroke "></i> 8.2
-                   </p>
-                   <p class="text-amber-500">
-                     <i class="fa-solid fa-clock-rotate-left text-sm"></i> 111 min
-                   </p>
-                 </div>
-               </div>
-              </div>
-                      <!-- 9 -->
-        <div class="w-[9%] h-[400px] flex justify-start items-end text-slate-50 relative rounded-xl bg-[url('/src/assets/poster.jpg')] bg-cover bg-no-repeat after:content-[''] after:absolute after:left-0 after:top-0 after:w-full after:h-full after:rounded-xl  after:bg-gradient-to-t after:from-[#041023] after:to-transparent">
-          <div class="z-10 w-full p-4">
-           <button class="absolute right-4 top-4 text-3xl"><i class="fa-regular fa-heart text-[#ea2a49]"></i></button>
-           <h3 class="text-2xl whitespace-nowrap overflow-hidden text-ellipsis">From Bedrooms to Billions: The Amiga Years!</h3>
-           <p class="mb-1 text-slate-300">Action3, Crime, Thriller</p>
-           <div class="flex justify-start items-start gap-3">
-             <p class="text-amber-500">
-               <i class="fa-solid fa-star-half-stroke "></i> 8.2
-             </p>
-             <p class="text-amber-500">
-               <i class="fa-solid fa-clock-rotate-left text-sm"></i> 111 min
-             </p>
-           </div>
-         </div>
-        </div>
-                <!-- 10 -->
-                <div class="w-[9%] h-[400px] flex justify-start items-end text-slate-50 relative rounded-xl bg-[url('/src/assets/poster.jpg')] bg-cover bg-no-repeat after:content-[''] after:absolute after:left-0 after:top-0 after:w-full after:h-full after:rounded-xl  after:bg-gradient-to-t after:from-[#041023] after:to-transparent">
-                  <div class="z-10 w-full p-4">
-                   <button class="absolute right-4 top-4 text-3xl"><i class="fa-regular fa-heart text-[#ea2a49]"></i></button>
-                   <h3 class="text-2xl whitespace-nowrap overflow-hidden text-ellipsis">From Bedrooms to Billions: The Amiga Years!</h3>
-                   <p class="mb-1 text-slate-300">Action3, Crime, Thriller</p>
-                   <div class="flex justify-start items-start gap-3">
-                     <p class="text-amber-500">
-                       <i class="fa-solid fa-star-half-stroke "></i> 8.2
-                     </p>
-                     <p class="text-amber-500">
-                       <i class="fa-solid fa-clock-rotate-left text-sm"></i> 111 min
-                     </p>
-                   </div>
-                 </div>
-                </div>
+         
       </div>
-      <script>
-        function fn(){
-          console.log('1');
-          document.getElementById('slider-container').classList.remove('translate-x-0')
-          document.getElementById('slider-container').classList.add('-translate-x-1/3')
-
-        }
-      </script>
       <!-- circles -->
-       <ul class=" flex justify-center items-center py-5 gap-2">
-        <li class="bg-[#ea2a49] w-6 h-3 rounded-full" onclick="fn()"></li>
-        <li class="bg-slate-300 w-3 h-3 rounded-full"></li>
-        <li class="bg-slate-300 w-3 h-3 rounded-full"></li>
-        <li class="bg-slate-300 w-3 h-3 rounded-full"></li>
-        <li class="bg-slate-300 w-3 h-3 rounded-full"></li>
-        <li class="bg-slate-300 w-3 h-3 rounded-full"></li>
-        <li class="bg-slate-300 w-3 h-3 rounded-full"></li>
-        <li class="bg-slate-300 w-3 h-3 rounded-full xl:hidden"></li>
-        <li class="bg-slate-300 w-3 h-3 rounded-full lg:hidden"></li>
-        <li class="bg-slate-300 w-3 h-3 rounded-full md:hidden"></li>
+       <ul class=" flex justify-center items-center py-5 gap-2 [&_li]:h-3 [&_li]:rounded-full [&_li]:transition[width] [&_li]:duration-100 [&_li]:ease-linear " id="top-ten-slider">
+        <li data-slide-to="0" class="slider-btn bg-[#ea2a49] w-6 "></li>
+        <li data-slide-to="1" class="slider-btn bg-slate-300 w-3 "></li>
+        <li data-slide-to="2" class="slider-btn bg-slate-300 w-3 "></li>
+        <li data-slide-to="3" class="slider-btn bg-slate-300 w-3 "></li>
+        <li data-slide-to="4" class="slider-btn bg-slate-300 w-3 "></li>
+        <li data-slide-to="5" class="slider-btn bg-slate-300 w-3 "></li>
+        <li data-slide-to="6" class="slider-btn bg-slate-300 w-3 "></li>
+        <li data-slide-to="7" class="slider-btn bg-slate-300 w-3 xl:hidden"></li>
+        <li data-slide-to="8" class="slider-btn bg-slate-300 w-3  lg:hidden"></li>
+        <li data-slide-to="9" class="slider-btn bg-slate-300 w-3  md:hidden"></li>
        </ul>
     </section>
 <!-- fetch movies section -->
  <section class="py-8 text-slate-50">
   <!-- tabs -->
   <div class="px-4">
-    <ul class="flex gap-4 text-xl md:text-2xl font-lobster  border-b-4 border-b-[#ea2a49]">
-      <li class="active py-2 text-[#ea2a49]"><button>Search Results</button></li>
-      <li class="py-2"><button class="">Favorites</button></li>
+    <ul class="flex gap-4 text-xl md:text-2xl font-lobster  border-b-4 border-b-[#ea2a49]" id="tabs-container-ul">
+      <li class="py-2 text-[#ea2a49] tab-item" data-tab-identifier="search"><button>Search Results</button></li>
+      <li class="py-2 tab-item" data-tab-identifier="favorite"><button class="">Favorites</button></li>
     </ul>
-    <!-- search results -->
-    <div class="py-4 lg:flex lg:justify-between lg:items-stretch lg:flex-wrap lg:gap-[1%]">
-      <!-- search item -->
-       <div class="bg-[#23252B] p-4 rounded-lg lg:w-[49.5%] mb-4">
-        <div class="img-container w-full h-[300px]">
-          <img src="src/assets/poster.jpg" alt="film poster" class="rounded-lg h-[300px] w-full object-cover object-top">
-        </div>
-        <div class="movie title flex justify-between items-center pt-3">
-          <h3 class="text-2xl whitespace-nowrap overflow-hidden text-ellipsis">Kill Bill: Vol. 1</h3>
-          <button class="text-2xl"><i class="fa-regular fa-heart text-[#ea2a49]"></i></button>
-        </div>
-        <ul class="flex justify-start items-center p-1 mt-3 rounded-l-lg gap-2 text-[#AFAFAF] bg-gradient-to-r from-[#1C1C22] to-transparent ">
-          <li title="Runtime"><i class="fa-solid fa-clock-rotate-left text-sm"></i> 111</li>
-          <li title="Released"><i class="fa-regular fa-calendar-check "></i> 2003</li>
-          <li title="imdbVotes"><i class="fa-solid fa-star-half-stroke "></i> 8.2 (1,223,388)</li>
-        </ul>
-        <p class="text-[#AFAFAF] mt-2 text-justify">After waking from a four-year coma, After waking from a four-year coma After waking from a four-year coma a former assa ssin wreaks veng eance on the team of assassins who betrayed her.</p>
-        <hr class="border-slate-500 my-2">
-        <ul class="text-[#AFAFAF] ">
-          <li title="Director"><i class="fa-solid fa-user-tie"></i><span class="font-bold"> Director: </span> Quentin Tarantino</li>
-          <li title="run time" class="mt-1 whitespace-nowrap overflow-hidden text-ellipsis"><i class="fa-solid fa-user-group "></i><span class="font-bold"> Actors: </span> Uma Thurman, David Carradine, Daryl Hannah</li>
-        </ul>
-       </div>
-             <!-- search item -->
-             <div class="bg-[#23252B] p-4 rounded-lg lg:w-[49.5%] mb-4">
-              <div class="img-container w-full h-[300px]">
-                <img src="src/assets/poster.jpg" alt="film poster" class="rounded-lg h-[300px] w-full object-cover object-top">
-              </div>
-              <div class="movie title flex justify-between items-center pt-3">
-                <h3 class="text-2xl whitespace-nowrap overflow-hidden text-ellipsis">Kill Bill: Vol. 1</h3>
-                <button class="text-2xl"><i class="fa-regular fa-heart text-[#ea2a49]"></i></button>
-              </div>
-              <ul class="flex justify-start items-center p-1 mt-3 rounded-l-lg gap-2 text-[#AFAFAF] bg-gradient-to-r from-[#1C1C22] to-transparent ">
-                <li title="Runtime"><i class="fa-solid fa-clock-rotate-left text-sm"></i> 111</li>
-                <li title="Released"><i class="fa-regular fa-calendar-check "></i> 2003</li>
-                <li title="imdbVotes"><i class="fa-solid fa-star-half-stroke "></i> 8.2 (1,223,388)</li>
-              </ul>
-              <p class="text-[#AFAFAF] mt-2 text-justify">After waking from a four-year coma, a former assa ssin wreaks veng eance on the team of assassins who betrayed her.</p>
-              <hr class="border-slate-500 my-2">
-              <ul class="text-[#AFAFAF] ">
-                <li title="Director"><i class="fa-solid fa-user-tie"></i><span class="font-bold"> Director: </span> Quentin Tarantino</li>
-                <li title="run time" class="mt-1 whitespace-nowrap overflow-hidden text-ellipsis"><i class="fa-solid fa-user-group "></i><span class="font-bold"> Actors: </span> Uma Thurman, David Carradine, Daryl Hannah</li>
-              </ul>
-             </div>
-                   <!-- search item -->
-       <div class="bg-[#23252B] p-4 rounded-lg lg:w-[49.5%] mb-4">
-        <div class="img-container w-full h-[300px]">
-          <img src="src/assets/poster.jpg" alt="film poster" class="rounded-lg h-[300px] w-full object-cover object-top">
-        </div>
-        <div class="movie title flex justify-between items-center pt-3">
-          <h3 class="text-2xl whitespace-nowrap overflow-hidden text-ellipsis">Kill Bill: Vol. 1</h3>
-          <button class="text-2xl"><i class="fa-regular fa-heart text-[#ea2a49]"></i></button>
-        </div>
-        <ul class="flex justify-start items-center p-1 mt-3 rounded-l-lg gap-2 text-[#AFAFAF] bg-gradient-to-r from-[#1C1C22] to-transparent ">
-          <li title="Runtime"><i class="fa-solid fa-clock-rotate-left text-sm"></i> 111</li>
-          <li title="Released"><i class="fa-regular fa-calendar-check "></i> 2003</li>
-          <li title="imdbVotes"><i class="fa-solid fa-star-half-stroke "></i> 8.2 (1,223,388)</li>
-        </ul>
-        <p class="text-[#AFAFAF] mt-2 text-justify">After waking from a four-year coma, a former assa ssin wreaks veng eance on the team of assassins who betrayed her.</p>
-        <hr class="border-slate-500 my-2">
-        <ul class="text-[#AFAFAF] ">
-          <li title="Director"><i class="fa-solid fa-user-tie"></i><span class="font-bold"> Director: </span> Quentin Tarantino</li>
-          <li title="run time" class="mt-1 whitespace-nowrap overflow-hidden text-ellipsis"><i class="fa-solid fa-user-group "></i><span class="font-bold"> Actors: </span> Uma Thurman, David Carradine, Daryl Hannah</li>
-        </ul>
-       </div>
-             <!-- search item -->
-             <div class="bg-[#23252B] p-4 rounded-lg lg:w-[49.5%] mb-4">
-              <div class="img-container w-full h-[300px]">
-                <img src="src/assets/poster.jpg" alt="film poster" class="rounded-lg h-[300px] w-full object-cover object-top">
-              </div>
-              <div class="movie title flex justify-between items-center pt-3">
-                <h3 class="text-2xl whitespace-nowrap overflow-hidden text-ellipsis">Kill Bill: Vol. 1</h3>
-                <button class="text-2xl"><i class="fa-regular fa-heart text-[#ea2a49]"></i></button>
-              </div>
-              <ul class="flex justify-start items-center p-1 mt-3 rounded-l-lg gap-2 text-[#AFAFAF] bg-gradient-to-r from-[#1C1C22] to-transparent ">
-                <li title="Runtime"><i class="fa-solid fa-clock-rotate-left text-sm"></i> 111</li>
-                <li title="Released"><i class="fa-regular fa-calendar-check "></i> 2003</li>
-                <li title="imdbVotes"><i class="fa-solid fa-star-half-stroke "></i> 8.2 (1,223,388)</li>
-              </ul>
-              <p class="text-[#AFAFAF] mt-2 text-justify">After waking from a four-year coma, a former assa ssin wreaks veng eance on the team of assassins who betrayed her.</p>
-              <hr class="border-slate-500 my-2">
-              <ul class="text-[#AFAFAF] ">
-                <li title="Director"><i class="fa-solid fa-user-tie"></i><span class="font-bold"> Director: </span> Quentin Tarantino</li>
-                <li title="run time" class="mt-1 whitespace-nowrap overflow-hidden text-ellipsis"><i class="fa-solid fa-user-group "></i><span class="font-bold"> Actors: </span> Uma Thurman, David Carradine, Daryl Hannah</li>
-              </ul>
-             </div>
-                   <!-- search item -->
-       <div class="bg-[#23252B] p-4 rounded-lg lg:w-[49.5%] mb-4">
-        <div class="img-container w-full h-[300px]">
-          <img src="src/assets/poster.jpg" alt="film poster" class="rounded-lg h-[300px] w-full object-cover object-top">
-        </div>
-        <div class="movie title flex justify-between items-center pt-3">
-          <h3 class="text-2xl whitespace-nowrap overflow-hidden text-ellipsis">Kill Bill: Vol. 1</h3>
-          <button class="text-2xl"><i class="fa-regular fa-heart text-[#ea2a49]"></i></button>
-        </div>
-        <ul class="flex justify-start items-center p-1 mt-3 rounded-l-lg gap-2 text-[#AFAFAF] bg-gradient-to-r from-[#1C1C22] to-transparent ">
-          <li title="Runtime"><i class="fa-solid fa-clock-rotate-left text-sm"></i> 111</li>
-          <li title="Released"><i class="fa-regular fa-calendar-check "></i> 2003</li>
-          <li title="imdbVotes"><i class="fa-solid fa-star-half-stroke "></i> 8.2 (1,223,388)</li>
-        </ul>
-        <p class="text-[#AFAFAF] mt-2 text-justify">After waking from a four-year coma, a former assa ssin wreaks veng eance on the team of assassins who betrayed her.</p>
-        <hr class="border-slate-500 my-2">
-        <ul class="text-[#AFAFAF] ">
-          <li title="Director"><i class="fa-solid fa-user-tie"></i><span class="font-bold"> Director: </span> Quentin Tarantino</li>
-          <li title="run time" class="mt-1 whitespace-nowrap overflow-hidden text-ellipsis"><i class="fa-solid fa-user-group "></i><span class="font-bold"> Actors: </span> Uma Thurman, David Carradine, Daryl Hannah</li>
-        </ul>
-       </div>
-             <!-- search item -->
-             <div class="bg-[#23252B] p-4 rounded-lg lg:w-[49.5%] mb-4">
-              <div class="img-container w-full h-[300px]">
-                <img src="src/assets/poster.jpg" alt="film poster" class="rounded-lg h-[300px] w-full object-cover object-top">
-              </div>
-              <div class="movie title flex justify-between items-center pt-3">
-                <h3 class="text-2xl whitespace-nowrap overflow-hidden text-ellipsis">Kill Bill: Vol. 1</h3>
-                <button class="text-2xl"><i class="fa-regular fa-heart text-[#ea2a49]"></i></button>
-              </div>
-              <ul class="flex justify-start items-center p-1 mt-3 rounded-l-lg gap-2 text-[#AFAFAF] bg-gradient-to-r from-[#1C1C22] to-transparent ">
-                <li title="Runtime"><i class="fa-solid fa-clock-rotate-left text-sm"></i> 111</li>
-                <li title="Released"><i class="fa-regular fa-calendar-check "></i> 2003</li>
-                <li title="imdbVotes"><i class="fa-solid fa-star-half-stroke "></i> 8.2 (1,223,388)</li>
-              </ul>
-              <p class="text-[#AFAFAF] mt-2 text-justify">After waking from a four-year coma, a former assa ssin wreaks veng eance on the team of assassins who betrayed her.</p>
-              <hr class="border-slate-500 my-2">
-              <ul class="text-[#AFAFAF] ">
-                <li title="Director"><i class="fa-solid fa-user-tie"></i><span class="font-bold"> Director: </span> Quentin Tarantino</li>
-                <li title="run time" class="mt-1 whitespace-nowrap overflow-hidden text-ellipsis"><i class="fa-solid fa-user-group "></i><span class="font-bold"> Actors: </span> Uma Thurman, David Carradine, Daryl Hannah</li>
-              </ul>
-             </div>
-                   <!-- search item -->
-       <div class="bg-[#23252B] p-4 rounded-lg lg:w-[49.5%] mb-4">
-        <div class="img-container w-full h-[300px]">
-          <img src="src/assets/poster.jpg" alt="film poster" class="rounded-lg h-[300px] w-full object-cover object-top">
-        </div>
-        <div class="movie title flex justify-between items-center pt-3">
-          <h3 class="text-2xl whitespace-nowrap overflow-hidden text-ellipsis">Kill Bill: Vol. 1</h3>
-          <button class="text-2xl"><i class="fa-regular fa-heart text-[#ea2a49]"></i></button>
-        </div>
-        <ul class="flex justify-start items-center p-1 mt-3 rounded-l-lg gap-2 text-[#AFAFAF] bg-gradient-to-r from-[#1C1C22] to-transparent ">
-          <li title="Runtime"><i class="fa-solid fa-clock-rotate-left text-sm"></i> 111</li>
-          <li title="Released"><i class="fa-regular fa-calendar-check "></i> 2003</li>
-          <li title="imdbVotes"><i class="fa-solid fa-star-half-stroke "></i> 8.2 (1,223,388)</li>
-        </ul>
-        <p class="text-[#AFAFAF] mt-2 text-justify">After waking from a four-year coma, a former assa ssin wreaks veng eance on the team of assassins who betrayed her.</p>
-        <hr class="border-slate-500 my-2">
-        <ul class="text-[#AFAFAF] ">
-          <li title="Director"><i class="fa-solid fa-user-tie"></i><span class="font-bold"> Director: </span> Quentin Tarantino</li>
-          <li title="run time" class="mt-1 whitespace-nowrap overflow-hidden text-ellipsis"><i class="fa-solid fa-user-group "></i><span class="font-bold"> Actors: </span> Uma Thurman, David Carradine, Daryl Hannah</li>
-        </ul>
-       </div>
-             <!-- search item -->
-             <div class="bg-[#23252B] p-4 rounded-lg lg:w-[49.5%] mb-4">
-              <div class="img-container w-full h-[300px]">
-                <img src="src/assets/poster.jpg" alt="film poster" class="rounded-lg h-[300px] w-full object-cover object-top">
-              </div>
-              <div class="movie title flex justify-between items-center pt-3">
-                <h3 class="text-2xl whitespace-nowrap overflow-hidden text-ellipsis">Kill Bill: Vol. 1</h3>
-                <button class="text-2xl"><i class="fa-regular fa-heart text-[#ea2a49]"></i></button>
-              </div>
-              <ul class="flex justify-start items-center p-1 mt-3 rounded-l-lg gap-2 text-[#AFAFAF] bg-gradient-to-r from-[#1C1C22] to-transparent ">
-                <li title="Runtime"><i class="fa-solid fa-clock-rotate-left text-sm"></i> 111</li>
-                <li title="Released"><i class="fa-regular fa-calendar-check "></i> 2003</li>
-                <li title="imdbVotes"><i class="fa-solid fa-star-half-stroke "></i> 8.2 (1,223,388)</li>
-              </ul>
-              <p class="text-[#AFAFAF] mt-2 text-justify">After waking from a four-year coma, a former assa ssin wreaks veng eance on the team of assassins who betrayed her.</p>
-              <hr class="border-slate-500 my-2">
-              <ul class="text-[#AFAFAF] ">
-                <li title="Director"><i class="fa-solid fa-user-tie"></i><span class="font-bold"> Director: </span> Quentin Tarantino</li>
-                <li title="run time" class="mt-1 whitespace-nowrap overflow-hidden text-ellipsis"><i class="fa-solid fa-user-group "></i><span class="font-bold"> Actors: </span> Uma Thurman, David Carradine, Daryl Hannah</li>
-              </ul>
-             </div>
-                   <!-- search item -->
-       <div class="bg-[#23252B] p-4 rounded-lg lg:w-[49.5%] mb-4">
-        <div class="img-container w-full h-[300px]">
-          <img src="src/assets/poster.jpg" alt="film poster" class="rounded-lg h-[300px] w-full object-cover object-top">
-        </div>
-        <div class="movie title flex justify-between items-center pt-3">
-          <h3 class="text-2xl whitespace-nowrap overflow-hidden text-ellipsis">Kill Bill: Vol. 1</h3>
-          <button class="text-2xl"><i class="fa-regular fa-heart text-[#ea2a49]"></i></button>
-        </div>
-        <ul class="flex justify-start items-center p-1 mt-3 rounded-l-lg gap-2 text-[#AFAFAF] bg-gradient-to-r from-[#1C1C22] to-transparent ">
-          <li title="Runtime"><i class="fa-solid fa-clock-rotate-left text-sm"></i> 111</li>
-          <li title="Released"><i class="fa-regular fa-calendar-check "></i> 2003</li>
-          <li title="imdbVotes"><i class="fa-solid fa-star-half-stroke "></i> 8.2 (1,223,388)</li>
-        </ul>
-        <p class="text-[#AFAFAF] mt-2 text-justify">After waking from a four-year coma, a former assa ssin wreaks veng eance on the team of assassins who betrayed her.</p>
-        <hr class="border-slate-500 my-2">
-        <ul class="text-[#AFAFAF] ">
-          <li title="Director"><i class="fa-solid fa-user-tie"></i><span class="font-bold"> Director: </span> Quentin Tarantino</li>
-          <li title="run time" class="mt-1 whitespace-nowrap overflow-hidden text-ellipsis"><i class="fa-solid fa-user-group "></i><span class="font-bold"> Actors: </span> Uma Thurman, David Carradine, Daryl Hannah</li>
-        </ul>
-       </div>
-             <!-- search item -->
-             <div class="bg-[#23252B] p-4 rounded-lg lg:w-[49.5%] mb-4">
-              <div class="img-container w-full h-[300px]">
-                <img src="src/assets/poster.jpg" alt="film poster" class="rounded-lg h-[300px] w-full object-cover object-top">
-              </div>
-              <div class="movie title flex justify-between items-center pt-3">
-                <h3 class="text-2xl whitespace-nowrap overflow-hidden text-ellipsis">Kill Bill: Vol. 1</h3>
-                <button class="text-2xl"><i class="fa-regular fa-heart text-[#ea2a49]"></i></button>
-              </div>
-              <ul class="flex justify-start items-center p-1 mt-3 rounded-l-lg gap-2 text-[#AFAFAF] bg-gradient-to-r from-[#1C1C22] to-transparent ">
-                <li title="Runtime"><i class="fa-solid fa-clock-rotate-left text-sm"></i> 111</li>
-                <li title="Released"><i class="fa-regular fa-calendar-check "></i> 2003</li>
-                <li title="imdbVotes"><i class="fa-solid fa-star-half-stroke "></i> 8.2 (1,223,388)</li>
-              </ul>
-              <p class="text-[#AFAFAF] mt-2 text-justify">After waking from a four-year coma, a former assa ssin wreaks veng eance on the team of assassins who betrayed her.</p>
-              <hr class="border-slate-500 my-2">
-              <ul class="text-[#AFAFAF] ">
-                <li title="Director"><i class="fa-solid fa-user-tie"></i><span class="font-bold"> Director: </span> Quentin Tarantino</li>
-                <li title="run time" class="mt-1 whitespace-nowrap overflow-hidden text-ellipsis"><i class="fa-solid fa-user-group "></i><span class="font-bold"> Actors: </span> Uma Thurman, David Carradine, Daryl Hannah</li>
-              </ul>
-             </div>
+    <!-- search results tab-->
+    <div class="py-4 lg:flex lg:justify-between lg:items-stretch lg:flex-wrap lg:gap-[1%]" 
+    id="search-results-tab">
+       <p><i class="fa-solid fa-bolt"></i> Search for movies to see the results here.</p> 
     </div>
+        <!-- favorites tab -->
+        <div class="py-4 hidden lg:justify-between lg:items-stretch lg:flex-wrap lg:gap-[1%]" 
+        id="favorite-movies-tab">
+           <p><i class="fa-solid fa-bolt"></i> There is no favorite movie. Please find your favorite movies and bookmark them.</p> 
+        </div>
   </div>
  </section>
  <footer>
