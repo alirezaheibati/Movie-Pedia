@@ -75,7 +75,13 @@ class OverlayMovieView extends View {
                   <i class="fa-solid fa-link"></i>
                 </button>
                 <button class="w-full sm:w-[49%] md:w-full xl:w-[49%] relative bg-[#ED145B] rounded-3xl py-3 text-slate-800">
-                  <p class="">Add To Favories <i class="fa-regular fa-heart"></i> </p>
+                  <p class="">${
+                    this._data.favorite === true
+                      ? "It is your Favorite "
+                      : "Add To Favories "
+                  }<i class="${
+      this._data.favorite === true ? "fa-solid" : "fa-regular"
+    } fa-heart"></i> </p>
                 </button>
               </div>
             </div>
