@@ -74,7 +74,7 @@ class OverlayMovieView extends View {
     })</a>
                   <i class="fa-solid fa-link"></i>
                 </button>
-                <button class="w-full sm:w-[49%] md:w-full xl:w-[49%] relative bg-[#ED145B] rounded-3xl py-3 text-slate-800">
+                <button class="w-full sm:w-[49%] md:w-full xl:w-[49%] relative bg-[#ED145B] rounded-3xl py-3 text-slate-800 overlay-favorite-btn">
                   <p class="">${
                     this._data.favorite === true
                       ? "It is your Favorite "
@@ -98,6 +98,17 @@ class OverlayMovieView extends View {
       .addEventListener("click", () => {
         this.toggleOverlay();
       });
+  }
+  /**
+   * Adds an event handler to the favorite button in the overlay.
+   * @param {Function} handle - The function to handle the favorite button click event.
+   */
+  addHandlerToFavoriteBtn(handle) {
+    this._parentElement.addEventListener("click", (e) => {
+      const btn = e.target.closest(".overlay-favorite-btn");
+      if (!btn) return;
+      handle();
+    });
   }
 }
 const overlayMovieView = new OverlayMovieView();
