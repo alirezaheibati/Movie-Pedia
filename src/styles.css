@@ -5,4 +5,5 @@
 html,
 body {
   font-family: "Roboto", system-ui, sans-serif;
+  overflow-x: hidden;
 }
