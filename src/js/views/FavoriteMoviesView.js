@@ -26,7 +26,9 @@ class FavoriteMoviesView extends View {
        }">
         <div class="img-container w-full h-[300px]">
           <img src="${
-            movie.Poster
+            movie.Poster !== "N/A"
+              ? movie.Poster
+              : "https://alirezaheibati.ir/projects/assets/movie2/holder.png"
           }" alt="film poster" class="rounded-lg h-[300px] w-full object-cover object-top">
         </div>
         <div class="movie title flex justify-between items-center pt-3">

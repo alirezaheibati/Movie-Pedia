@@ -24,11 +24,19 @@ class OverlayMovieView extends View {
   _generateMarkup() {
     return `
           <div class="overlay absolute w-full h-full left-0 top-0 z-30 bg-cover bg-no-repeat grayscale opacity-20"
-          style="background-image: url('${this._data.Poster}');" ></div>
+          style="${
+            this._data.Poster !== "N/A"
+              ? "background-image: url('${this._data.Poster}');"
+              : ""
+          }" ></div>
           <div class="content relative z-40 px-4 py-12 w-full h-screen flex flex-col md:flex-row gap-4 overflow-y-scroll"
           >
             <div class=" w-full">
-              <img src="${this._data.Poster}" alt="${
+              <img src="${
+                this._data.Poster !== "N/A"
+                  ? this._data.Poster
+                  : "https://alirezaheibati.ir/projects/assets/movie2/holder.png"
+              }" alt="${
       this._data.Title
     }" class="w-[280px] max-w-[90%] lg:w-[400px] h-auto block mx-auto rounded-2xl">
             </div>
